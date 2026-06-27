@@ -1,0 +1,2389 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TripQu - Premium Open Trip Indonesia</title>
+  <meta name="description"
+    content="Jelajahi keindahan alam Indonesia bersama TripQu. Layanan Open Trip premium dengan akomodasi dan rute petualangan terbaik ke Nusa Penida, Raja Ampat, Kelimutu, dan destinasi eksotis lainnya.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,300;0,400;0,700;0,900;1,700&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS v4 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Theme Configurations & Animations for Tailwind CSS v4 -->
+  <style type="text/css">
+    @theme {
+      --color-brand-dark: #F8FAFC;
+      /* Premium light background */
+      --color-brand-card: #FFFFFF;
+      /* Clean white card backgrounds */
+      --color-brand-red: #EF4444;
+      /* Primary red accent */
+      --color-brand-red-hover: #DC2626;
+      --color-brand-gray: #64748B;
+      /* Charcoal gray for subtexts */
+      --color-brand-charcoal: #0F172A;
+      /* Deep dark slate text */
+      --font-sans: 'Inter', sans-serif;
+      --font-display: 'Montserrat', sans-serif;
+      --font-serif: 'Playfair Display', serif;
+    }
+
+    /* Custom Animations and Styles */
+    body {
+      background-color: #F8FAFC;
+      color: #0F172A;
+      font-family: var(--font-sans);
+      overflow-x: hidden;
+    }
+
+    /* Premium Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #EF4444;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #DC2626;
+    }
+
+    /* Smooth scale and glow transitions for cards */
+    .premium-card {
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid #E2E8F0;
+    }
+
+    .premium-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+
+    /* Glassmorphism light helpers */
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+    }
+
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    .glass-modal {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(16px);
+    }
+
+    /* Keyframes for transitions */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideRight {
+      from {
+        transform: scaleX(0);
+        transform-origin: left;
+      }
+
+      to {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+    }
+
+    .animate-slide-right {
+      animation: slideRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Slider transition effects */
+    .slide-bg-transition {
+      transition: background-image 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Heart animation effect on click */
+    .heart-pop {
+      animation: heartPop 0.3s ease-out;
+    }
+
+    @keyframes heartPop {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.3);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+
+<body class="selection:bg-brand-red selection:text-white">
+
+  <!-- ================= HEADER / NAV BAR ================= -->
+  <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 glass-nav" id="mainHeader">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center space-x-2 group">
+        <span
+          class="w-2.5 h-2.5 rounded-full bg-brand-red animate-pulse group-hover:scale-125 transition-transform"></span>
+        <span class="font-display font-black text-2xl tracking-wider text-brand-charcoal">TRIP<span
+            class="text-brand-red">QU</span></span>
+      </a>
+
+      <!-- Category Tabs (Centered as in image_c7de1f.jpg) -->
+      <nav class="hidden md:flex items-center space-x-8 lg:space-x-12 relative" id="categoryNav">
+        <button onclick="switchCategory('wide sea')"
+          class="cat-tab-btn active text-sm font-display tracking-widest uppercase transition-all duration-300 relative py-2 font-semibold text-brand-charcoal"
+          data-category="wide sea">
+          Wide Sea
+          <span
+            class="absolute bottom-0 left-0 w-full h-[2px] bg-brand-red scale-x-100 transition-transform duration-300 origin-left"
+            id="indicator-wide-sea"></span>
+        </button>
+        <button onclick="switchCategory('mountains')"
+          class="cat-tab-btn text-sm font-display tracking-widest uppercase transition-all duration-300 relative py-2 font-medium text-brand-gray hover:text-brand-charcoal"
+          data-category="mountains">
+          Mountains
+          <span
+            class="absolute bottom-0 left-0 w-full h-[2px] bg-brand-red scale-x-0 transition-transform duration-300 origin-left"
+            id="indicator-mountains"></span>
+        </button>
+        <button onclick="switchCategory('island')"
+          class="cat-tab-btn text-sm font-display tracking-widest uppercase transition-all duration-300 relative py-2 font-medium text-brand-gray hover:text-brand-charcoal"
+          data-category="island">
+          Islands
+          <span
+            class="absolute bottom-0 left-0 w-full h-[2px] bg-brand-red scale-x-0 transition-transform duration-300 origin-left"
+            id="indicator-island"></span>
+        </button>
+      </nav>
+
+      <!-- CTA / Wishlist / Contact / Mobile Trigger -->
+      <div class="flex items-center space-x-4">
+
+        <!-- Wishlist Button with Badge -->
+        <button onclick="toggleWishlistDrawer()"
+          class="relative p-2.5 rounded-full hover:bg-slate-100 text-brand-charcoal transition-all focus:outline-none"
+          title="Wishlist">
+          <i data-lucide="heart" class="w-5 h-5"></i>
+          <span id="wishlistBadgeCount"
+            class="absolute -top-0.5 -right-0.5 bg-brand-red text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center scale-0 transition-transform duration-300">0</span>
+        </button>
+
+        <a href="#recommendations"
+          class="hidden lg:inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-slate-100 hover:bg-brand-red hover:text-white text-brand-charcoal text-xs font-display tracking-widest uppercase font-semibold transition-all duration-300 border border-slate-200">
+          Cari Destinasi
+        </a>
+        <button class="md:hidden text-brand-charcoal hover:text-brand-red focus:outline-none" id="mobileMenuBtn"
+          onclick="toggleMobileNav()">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Overlay -->
+    <div
+      class="hidden md:hidden absolute top-20 left-0 w-full bg-white border-b border-slate-200 px-6 py-6 transition-all duration-300 shadow-lg"
+      id="mobileMenu">
+      <div class="flex flex-col space-y-4">
+        <button onclick="switchCategory('wide sea'); toggleMobileNav();"
+          class="text-left py-2 font-display text-sm tracking-widest uppercase text-brand-charcoal font-semibold">Wide
+          Sea</button>
+        <button onclick="switchCategory('mountains'); toggleMobileNav();"
+          class="text-left py-2 font-display text-sm tracking-widest uppercase text-brand-gray hover:text-brand-charcoal">Mountains</button>
+        <button onclick="switchCategory('island'); toggleMobileNav();"
+          class="text-left py-2 font-display text-sm tracking-widest uppercase text-brand-gray hover:text-brand-charcoal">Islands</button>
+        <hr class="border-slate-100">
+        <button onclick="toggleWishlistDrawer(); toggleMobileNav();"
+          class="text-left py-2 font-display text-sm tracking-widest uppercase text-brand-charcoal flex items-center space-x-2">
+          <i data-lucide="heart" class="w-4 h-4 text-brand-red"></i>
+          <span>Wishlist Saya</span>
+        </button>
+        <a href="#recommendations" onclick="toggleMobileNav();"
+          class="text-center py-3 bg-brand-red text-white text-xs font-display tracking-widest uppercase font-bold rounded-lg shadow-md shadow-brand-red/10">Cari
+          Destinasi</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO SECTION (CINEMATIC SLIDER) ================= -->
+  <section class="relative w-full h-screen flex flex-col justify-between overflow-hidden pt-20" id="hero-section">
+
+    <!-- Cinematic Backdrop Images -->
+    <div class="absolute inset-0 z-0 bg-cover bg-center slide-bg-transition brightness-60 contrast-105 scale-105"
+      id="hero-backdrop"
+      style="background-image: url('https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&q=80&w=1920');">
+    </div>
+    <div class="absolute inset-0 z-1 bg-gradient-to-t from-[#F8FAFC] via-[#F8FAFC]/30 to-black/30"></div>
+
+    <!-- Top line decorator (Inspired by layout top red stripe) -->
+    <div class="absolute top-20 left-0 w-full h-[1px] bg-slate-200 z-10">
+      <div class="max-w-7xl mx-auto px-6 h-full relative">
+        <div class="absolute top-0 left-6 right-6 h-[1px] bg-slate-200/50"></div>
+      </div>
+    </div>
+
+    <!-- MAIN HERO CONTENT CONTAINER -->
+    <div class="max-w-7xl mx-auto px-6 w-full flex-grow flex items-center relative z-10">
+
+      <!-- Grid layout for main text & right side slider paging -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full">
+
+        <!-- Left Column: Editorial Large Headings -->
+        <div class="lg:col-span-8 flex flex-col justify-center space-y-4">
+          <div class="flex items-center space-x-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-brand-red"></span>
+            <span class="text-xs font-display tracking-[0.3em] uppercase text-brand-red font-bold animate-pulse">PREMIUM
+              EXPEDITION</span>
+          </div>
+
+          <h1
+            class="font-display font-black text-6xl md:text-8xl xl:text-9xl leading-none tracking-tighter uppercase relative select-none">
+            <span class="block text-white">VISIT</span>
+            <span class="block text-brand-charcoal opacity-95">INDONESIA</span>
+          </h1>
+
+          <div class="h-[2px] w-24 bg-brand-red mt-4 relative overflow-hidden">
+            <span class="absolute inset-0 bg-white translate-x-[-100%] animate-[slideRight_2s_infinite]"></span>
+          </div>
+
+          <!-- Highlighted Destination Title & Action -->
+          <div
+            class="mt-6 flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-8 animate-fade-in"
+            id="hero-destination-details">
+            <div>
+              <span class="text-xs font-display tracking-widest uppercase text-slate-200 drop-shadow">Destinasi
+                Aktif</span>
+              <h2 class="text-2xl md:text-3xl font-display font-bold text-white tracking-wide mt-1 drop-shadow-md"
+                id="hero-dest-title">Nusa Penida Island</h2>
+            </div>
+            <div class="flex items-center space-x-4">
+              <button onclick="openModalFromHero()"
+                class="inline-flex items-center justify-center px-6 py-3 bg-brand-red hover:bg-brand-red-hover text-white text-xs font-display tracking-widest uppercase font-bold transition-all duration-300 rounded shadow-lg shadow-brand-red/20 transform hover:-translate-y-0.5">
+                Lihat Detail
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Vertical Page Indicators (Inspired by 03, 04, 05 from image_c7de1f.jpg) -->
+        <div class="hidden lg:col-span-4 lg:flex flex-col items-end justify-center">
+          <div class="flex flex-col space-y-4 text-right pr-6 border-r border-slate-300 relative py-8"
+            id="hero-slider-indicators">
+            <!-- Dynamically populated vertical steps -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BOTTOM INFO BAR (Inspired by image_c7de1f.jpg: 3 Columns of destination notes + Swipe Action) -->
+    <div class="w-full relative z-10 bg-gradient-to-t from-brand-dark to-transparent pt-12 pb-16">
+      <div class="max-w-7xl mx-auto px-6">
+
+        <!-- Active Slide indicator line -->
+        <div class="relative w-full h-[1px] bg-slate-350/50 mb-8">
+          <div class="absolute top-0 left-0 h-[2px] bg-brand-red transition-all duration-500 ease-out"
+            id="hero-progress-bar" style="width: 33.33%; left: 0%;"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+
+          <!-- Triple column previews linked to active category slides -->
+          <div class="lg:col-span-9 grid grid-cols-1 md:grid-cols-3 gap-6 text-left" id="hero-columns-container">
+            <!-- Dynamically filled with destinations in current category -->
+          </div>
+
+          <!-- Swipe Action on the Right -->
+          <div class="lg:col-span-3 flex justify-end items-center">
+            <button onclick="nextSlide()"
+              class="group flex items-center space-x-4 text-brand-charcoal hover:text-brand-red font-display text-xs tracking-widest uppercase transition-all focus:outline-none">
+              <span class="border-b border-transparent group-hover:border-brand-red pb-1 font-bold">SWIPE >></span>
+              <span
+                class="w-10 h-10 rounded-full border border-slate-300 group-hover:border-brand-red/50 flex items-center justify-center transition-all bg-white/50 group-hover:bg-brand-red/10">
+                <i data-lucide="chevron-right"
+                  class="w-4 h-4 text-brand-charcoal group-hover:text-brand-red transition-colors"></i>
+              </span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ================= TENTANG TRIPQU (ABOUT SECTION) ================= -->
+  <section class="py-24 bg-white relative z-10" id="about-us">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+        <!-- Left: Layered premium photos -->
+        <div class="lg:col-span-6 grid grid-cols-12 gap-4 relative">
+          <div
+            class="col-span-8 rounded-2xl overflow-hidden border border-slate-200 shadow-lg transform -rotate-1 hover:rotate-0 transition-all duration-500">
+            <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=800"
+              alt="Adventure Group" class="w-full h-[300px] object-cover">
+          </div>
+          <div
+            class="col-span-4 rounded-2xl overflow-hidden border border-slate-200 shadow-lg transform translate-y-12 translate-x-[-10px] rotate-2 hover:rotate-0 transition-all duration-500">
+            <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&q=80&w=400"
+              alt="Traveler Log" class="w-full h-[200px] object-cover">
+          </div>
+
+          <!-- Float Stats Card -->
+          <div
+            class="absolute -bottom-6 left-12 bg-brand-red text-white p-5 rounded-2xl shadow-xl flex items-center space-x-4 max-w-xs border border-brand-red-hover transform hover:scale-105 transition-transform duration-300">
+            <div class="w-12 h-12 rounded-full bg-white/15 flex items-center justify-center text-white">
+              <i data-lucide="users" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h4 class="font-display font-black text-xl leading-none">10.000+</h4>
+              <p class="text-[9px] uppercase font-bold tracking-widest opacity-90 mt-1">Travelers Happy</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Text Description -->
+        <div class="lg:col-span-6 space-y-6">
+          <span class="text-xs font-display tracking-[0.3em] uppercase text-brand-red font-black">ABOUT THE
+            TRIPQU</span>
+          <h2
+            class="text-3xl md:text-5xl font-display font-black text-brand-charcoal uppercase tracking-tight leading-none">
+            KAMI ADALAH KURATOR PETUALANGAN PREMIUM ANDA
+          </h2>
+          <p class="text-brand-gray text-sm leading-relaxed font-medium">
+            TripQu didirikan untuk menjembatani jiwa petualang Anda dengan keindahan nusantara yang belum terjamah,
+            tanpa mengorbankan kenyamanan. Kami merancang setiap open trip secara detail—mulai dari akomodasi resort
+            mewah, pelayaran phinisi kelas atas, hingga rute perjalanan eksklusif yang memanjakan mata.
+          </p>
+          <p class="text-brand-gray text-sm leading-relaxed font-medium">
+            Kami berkomitmen mendukung ekowisata berkelanjutan dengan bekerja sama langsung dengan pemandu lokal
+            berlisensi dan komunitas adat setempat, memastikan setiap perjalanan Anda membawa dampak positif bagi
+            destinasi yang dikunjungi.
+          </p>
+          <div class="pt-4 flex flex-wrap gap-6 items-center">
+            <div class="flex items-center space-x-2">
+              <i data-lucide="shield-check" class="w-5 h-5 text-brand-red"></i>
+              <span class="text-xs font-display font-bold text-brand-charcoal uppercase tracking-wider">100% Bergaransi
+                Aman</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <i data-lucide="compass" class="w-5 h-5 text-brand-red"></i>
+              <span class="text-xs font-display font-bold text-brand-charcoal uppercase tracking-wider">Pemandu Lokal
+                Berlisensi</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= KEUNGGULAN KAMI (WHY CHOOSE US) ================= -->
+  <section class="py-24 bg-slate-50 relative z-10 border-t border-slate-200/50" id="advantages">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16 space-y-2">
+        <span class="text-xs font-display tracking-[0.3em] uppercase text-brand-red font-bold">WHY CHOOSE US</span>
+        <h2 class="text-3xl md:text-5xl font-display font-black text-brand-charcoal uppercase tracking-tight">KEUNGGULAN
+          TRIPQU ADVENTURE</h2>
+        <div class="w-12 h-1 bg-brand-red mx-auto mt-4 rounded-full"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Card 1 -->
+        <div
+          class="bg-white border border-slate-200/80 p-6 rounded-2xl space-y-4 hover:shadow-lg hover:border-brand-red/20 transition-all transform hover:-translate-y-1 duration-300">
+          <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center text-brand-red">
+            <i data-lucide="map" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-base font-bold text-brand-charcoal">Rute Eksklusif</h3>
+          <p class="text-xs text-brand-gray leading-relaxed font-medium">Setiap itinerary dirancang khusus untuk
+            menjangkau spot-spot tersembunyi terbaik sebelum ramai dikunjungi wisatawan umum.</p>
+        </div>
+        <!-- Card 2 -->
+        <div
+          class="bg-white border border-slate-200/80 p-6 rounded-2xl space-y-4 hover:shadow-lg hover:border-brand-red/20 transition-all transform hover:-translate-y-1 duration-300">
+          <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center text-brand-red">
+            <i data-lucide="users" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-base font-bold text-brand-charcoal">Pemandu Profesional</h3>
+          <p class="text-xs text-brand-gray leading-relaxed font-medium">Didampingi oleh local guide profesional
+            berlisensi HPI yang memahami budaya, sejarah, dan titik navigasi teraman.</p>
+        </div>
+        <!-- Card 3 -->
+        <div
+          class="bg-white border border-slate-200/80 p-6 rounded-2xl space-y-4 hover:shadow-lg hover:border-brand-red/20 transition-all transform hover:-translate-y-1 duration-300">
+          <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center text-brand-red">
+            <i data-lucide="hotel" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-base font-bold text-brand-charcoal">Akomodasi Bintang</h3>
+          <p class="text-xs text-brand-gray leading-relaxed font-medium">Akomodasi hotel/resort pilihan terbaik, armada
+            transportasi ber-AC prima, dan konsumsi lezat higienis selama perjalanan.</p>
+        </div>
+        <!-- Card 4 -->
+        <div
+          class="bg-white border border-slate-200/80 p-6 rounded-2xl space-y-4 hover:shadow-lg hover:border-brand-red/20 transition-all transform hover:-translate-y-1 duration-300">
+          <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center text-brand-red">
+            <i data-lucide="help-circle" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-base font-bold text-brand-charcoal">Dukungan Konsultasi 24/7</h3>
+          <p class="text-xs text-brand-gray leading-relaxed font-medium">Tim customer care kami siap membantu konsultasi
+            perjalanan, kustomisasi kuota, hingga bantuan medis darurat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RECOMMENDATION GRID (OPEN TRIP DIRECTORY) ================= -->
+  <section class="py-24 bg-[#F8FAFC] relative z-10 border-t border-slate-200/50" id="recommendations">
+
+    <div class="max-w-7xl mx-auto px-6 relative">
+
+      <!-- Section Headers -->
+      <div class="text-center mb-16 space-y-2">
+        <span class="text-xs font-display tracking-[0.3em] uppercase text-brand-red font-bold">confusion? These
+          recommendation</span>
+        <h2 class="text-3xl md:text-5xl font-display font-black text-brand-charcoal uppercase tracking-tight">
+          destination recommendations</h2>
+        <div class="w-12 h-1 bg-brand-red mx-auto mt-4 rounded-full"></div>
+      </div>
+
+      <!-- Filters & Search Bar -->
+      <div
+        class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-10 p-5 rounded-xl bg-white border border-slate-200/80 shadow-sm">
+
+        <!-- Search Input -->
+        <div class="relative w-full lg:w-96">
+          <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-brand-gray">
+            <i data-lucide="search" class="w-4.5 h-4.5"></i>
+          </span>
+          <input type="text" id="searchInput" oninput="applyFilters()" placeholder="Cari destinasi impian Anda..."
+            class="w-full bg-slate-50 border border-slate-200 rounded-lg py-2.5 pl-10 pr-4 text-sm text-brand-charcoal placeholder-brand-gray focus:outline-none focus:border-brand-red/50 focus:ring-1 focus:ring-brand-red/20 transition-all">
+        </div>
+
+        <!-- Sorting -->
+        <div class="flex items-center space-x-3 self-end lg:self-auto">
+          <span class="text-xs text-brand-gray font-display tracking-wider uppercase font-semibold">Urutkan:</span>
+          <select id="sortSelect" onchange="applyFilters()"
+            class="bg-slate-50 border border-slate-200 rounded-lg text-sm text-brand-charcoal px-3 py-2 focus:outline-none focus:border-brand-red/50 cursor-pointer">
+            <option value="default">Rekomendasi</option>
+            <option value="price-asc">Harga Terendah</option>
+            <option value="price-desc">Harga Tertinggi</option>
+            <option value="rating-desc">Rating Terbaik</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- Recommendations Grid Container -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="destinations-grid">
+        <!-- Rendered dynamically by javascript -->
+      </div>
+
+      <!-- Zero Result Alert -->
+      <div id="no-results" class="hidden text-center py-20">
+        <i data-lucide="frown" class="w-12 h-12 text-brand-gray mx-auto mb-4"></i>
+        <h3 class="text-xl font-bold text-brand-charcoal mb-2">Destinasi Tidak Ditemukan</h3>
+        <p class="text-brand-gray text-sm">Coba cari dengan kata kunci lain atau ubah kategori pilihan Anda.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= TRAVELER LOGS / VISUAL FOOTER ================= -->
+  <footer class="relative bg-slate-100 pt-28 pb-16 overflow-hidden border-t border-slate-200" id="traveler-logs">
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+        <!-- Left Block: Large Headings & Description -->
+        <div class="lg:col-span-6 space-y-6">
+          <h2
+            class="font-display font-black text-5xl md:text-6xl text-brand-charcoal tracking-tighter uppercase leading-none">
+            TRAVEL AND <br>
+            ENJOY YOUR <br>
+            HOLIDAY
+          </h2>
+
+          <button onclick="openVideoPlayer('https://youtu.be/aCDjkal6vHo?si=QmnEZVPqkKp5NcsU')"
+            class="inline-flex items-center space-x-3 group text-brand-charcoal hover:text-brand-red font-display text-sm tracking-widest uppercase transition-all duration-300 focus:outline-none">
+            <span
+              class="w-12 h-12 rounded-full border border-slate-300 flex items-center justify-center group-hover:border-brand-red/50 bg-white/50 group-hover:bg-brand-red/10 transition-all">
+              <i data-lucide="play"
+                class="w-4 h-4 text-brand-charcoal group-hover:text-brand-red fill-current transition-colors"></i>
+            </span>
+            <span class="font-bold text-xs pb-0.5 border-b border-transparent group-hover:border-brand-red">CHOOSE YOUR
+              FUN HOLIDAY</span>
+          </button>
+
+          <p class="text-brand-gray text-sm leading-relaxed max-w-lg pt-4 border-t border-slate-200">
+            Kisah perjalanan dari petualangan premium TripQu sebelumnya. Lihat keindahan lanskap Indonesia, kegembiraan
+            peserta trip, dan momen-momen magis yang berhasil didokumentasikan langsung oleh tim media profesional kami.
+          </p>
+        </div>
+
+        <!-- Right Block: Grid Images and Video Banner (Visual replication from bottom image_c7de1f.jpg) -->
+        <div class="lg:col-span-6 flex flex-col md:flex-row md:items-end justify-end gap-6">
+
+          <!-- Simulated Video Banner Thumbnail with play icon -->
+          <div
+            class="relative w-full md:w-80 h-48 rounded-lg overflow-hidden group cursor-pointer border border-slate-200 hover:border-brand-red/50 transition-all duration-500 shadow-lg"
+            onclick="openVideoPlayer('https://youtu.be/aCDjkal6vHo?si=QmnEZVPqkKp5NcsU')">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=600"
+              alt="Video Logs Preview"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 brightness-95">
+            <div
+              class="absolute inset-0 bg-black/15 group-hover:bg-black/5 transition-colors flex items-center justify-center">
+              <div
+                class="w-14 h-14 rounded-full bg-brand-red/90 group-hover:bg-brand-red flex items-center justify-center shadow-lg shadow-brand-red/30 transition-all transform group-hover:scale-110">
+                <i data-lucide="play" class="w-6 h-6 text-white fill-current ml-0.5"></i>
+              </div>
+            </div>
+            <div class="absolute bottom-4 left-4">
+              <span
+                class="text-[10px] font-display uppercase tracking-widest bg-brand-red text-white px-2.5 py-1 rounded font-semibold">Play
+                Log</span>
+            </div>
+          </div>
+
+          <!-- Secondary Image Grid/Thumbnail -->
+          <div
+            class="relative w-full md:w-56 h-40 rounded-lg overflow-hidden border border-slate-200 hover:border-brand-red/50 transition-all duration-500 shadow-lg group cursor-zoom-in"
+            onclick="openImageZoom('https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&q=80&w=1200')">
+            <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&q=80&w=400"
+              alt="Traveler Logs"
+              class="w-full h-full object-cover group-hover:scale-115 transition-transform duration-700">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-4">
+              <span class="text-xs font-display text-white font-medium">Pulau Arborek, 2026</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ================= ULASAN WISATAWAN (TESTIMONIALS SECTION) ================= -->
+      <section class="py-24 bg-white relative z-10 border-t border-slate-200/50" id="testimonials-section">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="text-center mb-16 space-y-2">
+            <span class="text-xs font-display tracking-[0.3em] uppercase text-brand-red font-bold">TRAVELER
+              REVIEWS</span>
+            <h2 class="text-3xl md:text-5xl font-display font-black text-brand-charcoal uppercase tracking-tight">APA
+              KATA PARA PETUALANG</h2>
+            <div class="w-12 h-1 bg-brand-red mx-auto mt-4 rounded-full"></div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Testimonial 1 -->
+            <div
+              class="bg-slate-50 border border-slate-200/80 p-6 rounded-2xl space-y-4 flex flex-col justify-between hover:shadow-md transition-shadow duration-300">
+              <div class="space-y-3">
+                <div class="flex text-amber-400">
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                </div>
+                <p class="text-xs text-brand-gray italic leading-relaxed font-medium">
+                  "Luar biasa! Pelayanan sailing trip Phinisi di Komodo sangat berkelas. Makanan yang disajikan chef
+                  kapal sangat enak, kabin AC-nya dingin, dan guide lokalnya sangat jeli mengabadikan foto drone kami di
+                  Pulau Padar."
+                </p>
+              </div>
+              <div class="flex items-center space-x-3 pt-4 border-t border-slate-200/50">
+                <div
+                  class="w-10 h-10 rounded-full bg-brand-red/10 border border-brand-red/20 text-brand-red flex items-center justify-center font-bold text-xs select-none">
+                  RE</div>
+                <div>
+                  <h4 class="text-xs font-bold text-brand-charcoal">Rendi Ermansyah</h4>
+                  <span class="text-[10px] text-brand-gray">Jakarta (Joined Komodo Trip)</span>
+                </div>
+              </div>
+            </div>
+            <!-- Testimonial 2 -->
+            <div
+              class="bg-slate-50 border border-slate-200/80 p-6 rounded-2xl space-y-4 flex flex-col justify-between hover:shadow-md transition-shadow duration-300">
+              <div class="space-y-3">
+                <div class="flex text-amber-400">
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                </div>
+                <p class="text-xs text-brand-gray italic leading-relaxed font-medium">
+                  "Bagi saya yang suka foto-foto, ikut trip Nusa Penida bersama TripQu adalah pilihan tepat. Mereka
+                  mengarahkan ke spot-spot bukit kelingking yang sepi dan membantu mengambil sudut foto terbaik.
+                  Homestay AC-nya nyaman sekali."
+                </p>
+              </div>
+              <div class="flex items-center space-x-3 pt-4 border-t border-slate-200/50">
+                <div
+                  class="w-10 h-10 rounded-full bg-brand-red/10 border border-brand-red/20 text-brand-red flex items-center justify-center font-bold text-xs select-none">
+                  SF</div>
+                <div>
+                  <h4 class="text-xs font-bold text-brand-charcoal">Siti Fatimah</h4>
+                  <span class="text-[10px] text-brand-gray">Bandung (Joined Nusa Penida Trip)</span>
+                </div>
+              </div>
+            </div>
+            <!-- Testimonial 3 -->
+            <div
+              class="bg-slate-50 border border-slate-200/80 p-6 rounded-2xl space-y-4 flex flex-col justify-between hover:shadow-md transition-shadow duration-300">
+              <div class="space-y-3">
+                <div class="flex text-amber-400">
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                  <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                </div>
+                <p class="text-xs text-brand-gray italic leading-relaxed font-medium">
+                  "Sangat puas dengan rute trekking dan sunrise di Gunung Kelimutu Flores. Akomodasi lodge di kaki
+                  gunung sangat asri dan udaranya segar sekali. Driver shuttle Flores handal dan sabar melewati jalur
+                  kelok."
+                </p>
+              </div>
+              <div class="flex items-center space-x-3 pt-4 border-t border-slate-200/50">
+                <div
+                  class="w-10 h-10 rounded-full bg-brand-red/10 border border-brand-red/20 text-brand-red flex items-center justify-center font-bold text-xs select-none">
+                  WK</div>
+                <div>
+                  <h4 class="text-xs font-bold text-brand-charcoal">Willy Kurniawan</h4>
+                  <span class="text-[10px] text-brand-gray">Surabaya (Joined Kelimutu Trip)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Footer Info & Credits -->
+      <div
+        class="mt-20 pt-8 border-t border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-brand-gray font-display">
+        <div>
+          <p>© 2026 TripQu Adventure Co. All Rights Reserved.</p>
+        </div>
+        <div class="flex items-center space-x-6">
+          <a href="#" class="hover:text-brand-red transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-brand-red transition-colors">Terms of Service</a>
+          <a href="http://instagram.com/fthyh_zhr" target="_blank"
+            class="hover:text-brand-red transition-colors text-brand-charcoal font-semibold flex items-center space-x-1.5">
+            <i data-lucide="instagram" class="w-4 h-4"></i>
+            <span>instagram.com/tripqu_adventure</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ================= WISHLIST DRAWER PANEL ================= -->
+  <div id="wishlistDrawerOverlay"
+    class="fixed inset-0 z-[140] bg-slate-900/60 backdrop-blur-sm hidden transition-opacity duration-300"
+    onclick="toggleWishlistDrawer()"></div>
+
+  <div id="wishlistDrawer"
+    class="fixed top-0 right-0 h-full w-full sm:w-96 bg-white z-[150] shadow-2xl border-l border-slate-200 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col">
+
+    <!-- Drawer Header -->
+    <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+      <h3
+        class="font-display font-black text-lg text-brand-charcoal uppercase tracking-wider flex items-center space-x-2">
+        <i data-lucide="heart" class="w-5 h-5 text-brand-red fill-current"></i>
+        <span>Wishlist Saya</span>
+      </h3>
+      <button onclick="toggleWishlistDrawer()"
+        class="p-1 rounded-full hover:bg-slate-200 text-brand-gray transition-colors focus:outline-none">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Drawer Content -->
+    <div class="flex-grow overflow-y-auto p-5 space-y-4" id="wishlistDrawerItems">
+      <!-- Dynamically filled with wishlisted cards -->
+    </div>
+
+    <!-- Drawer Footer -->
+    <div class="p-5 border-t border-slate-100 bg-slate-50 flex flex-col space-y-3">
+      <div class="flex justify-between text-xs text-brand-gray uppercase tracking-wider font-semibold">
+        <span>Total Destinasi:</span>
+        <span id="wishlistTotalCount">0 Item</span>
+      </div>
+      <a href="#recommendations" onclick="toggleWishlistDrawer()"
+        class="text-center py-3 bg-brand-charcoal hover:bg-slate-800 text-white text-xs font-display tracking-widest uppercase font-bold rounded-lg transition-colors">
+        Lanjutkan Eksplorasi
+      </a>
+    </div>
+
+  </div>
+
+  <!-- ================= MULTI-STEP DETAIL & BOOKING MODAL ================= -->
+  <div id="bookingModal"
+    class="fixed inset-0 z-[100] hidden bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+    <div
+      class="relative w-full max-w-4xl rounded-2xl bg-white shadow-2xl overflow-hidden max-h-[90vh] flex flex-col transition-all duration-300"
+      id="modalContent">
+
+      <!-- Close Button -->
+      <button onclick="closeModal()"
+        class="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-slate-100 hover:bg-brand-red/20 text-brand-charcoal hover:text-brand-red flex items-center justify-center transition-all border border-slate-200 focus:outline-none cursor-pointer">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <!-- ================= SCREEN 1: DETAILED VIEW ================= -->
+      <div id="modalDetailScreen" class="w-full flex flex-col max-h-[90vh] overflow-y-auto p-6 md:p-8"
+        style="scrollbar-width: thin;">
+
+        <!-- Header details & Wishlist Quick Add -->
+        <div class="flex items-center justify-between mb-3 pr-8">
+          <div class="flex items-center space-x-3">
+            <span
+              class="px-3 py-1 rounded bg-brand-red/10 text-brand-red text-xs font-display tracking-wider uppercase font-semibold border border-brand-red/20"
+              id="modalRankBadge"></span>
+            <span
+              class="px-3 py-1 rounded bg-slate-100 text-brand-gray text-xs font-display tracking-wider uppercase font-semibold border border-slate-200"
+              id="modalCategoryBadge"></span>
+          </div>
+
+          <button onclick="toggleModalWishlist()"
+            class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-brand-gray hover:text-brand-red hover:border-brand-red/30 transition-colors focus:outline-none cursor-pointer"
+            id="modalWishlistBtn">
+            <i data-lucide="heart" class="w-4 h-4"></i>
+            <span id="modalWishlistText">Wishlist</span>
+          </button>
+        </div>
+
+        <h3 class="text-3xl md:text-4xl font-display font-black text-brand-charcoal uppercase tracking-tight mb-1"
+          id="modalTripTitle">NUSA PENIDA ISLAND</h3>
+
+        <div class="flex items-center space-x-1.5 text-xs text-brand-gray mb-6 font-semibold">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-brand-red"></i>
+          <span id="modalTripLocation">Klungkung, Bali</span>
+        </div>
+
+        <!-- Cover photo container -->
+        <div class="relative h-64 md:h-[350px] rounded-xl overflow-hidden mb-4 border border-slate-200">
+          <img src="" id="modalTripImage" alt="Trip Cover" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+
+          <!-- Stars rating overlay -->
+          <div
+            class="absolute bottom-4 left-4 flex items-center space-x-1.5 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-lg border border-slate-200">
+            <i data-lucide="star" class="w-4 h-4 text-amber-400 fill-amber-400"></i>
+            <span class="text-sm font-bold text-brand-charcoal" id="modalRatingText">4.9</span>
+            <span class="text-xs text-brand-gray">(Verified reviews)</span>
+          </div>
+        </div>
+
+        <!-- Gallery Thumbnails Grid -->
+        <div class="flex items-center space-x-3 mb-6" id="modalGalleryContainer">
+          <!-- Populated dynamically -->
+        </div>
+
+        <!-- Detailed Trip Description -->
+        <div class="space-y-4 mb-8">
+          <h4 class="text-xs font-display tracking-widest uppercase font-bold text-brand-charcoal">Deskripsi Perjalanan
+          </h4>
+          <p class="text-brand-gray text-sm leading-relaxed font-medium" id="modalTripDescription"></p>
+        </div>
+
+        <!-- Dynamic TABS (Itinerary, Include/Exclude, Meeting Point, Reviews) -->
+        <div class="border-b border-slate-200 flex space-x-6 mb-6 overflow-x-auto" style="scrollbar-width: none;">
+          <button onclick="switchModalTab('itinerary')"
+            class="modal-tab-btn active pb-3 text-sm font-display tracking-widest uppercase transition-all relative font-bold text-brand-charcoal shrink-0"
+            data-tab="itinerary">
+            Rencana Kegiatan
+            <span
+              class="absolute bottom-0 left-0 w-full h-[2px] bg-brand-red scale-x-100 transition-transform duration-300 origin-left"
+              id="modalTabIndicator-itinerary"></span>
+          </button>
+          <button onclick="switchModalTab('facilities')"
+            class="modal-tab-btn pb-3 text-sm font-display tracking-widest uppercase transition-all relative font-semibold text-brand-gray hover:text-brand-charcoal shrink-0"
+            data-tab="facilities">
+            Fasilitas Lengkap
+            <span
+              class="absolute bottom-0 left-0 w-full h-[2px] bg-brand-red scale-x-0 transition-transform duration-300 origin-left"
+              id="modalTabIndicator-facilities"></span>
+          </button>
+          <button onclick="switchModalTab('meeting')"
+            class="modal-tab-btn pb-3 text-sm font-display tracking-widest uppercase transition-all relative font-semibold text-brand-gray hover:text-brand-charcoal shrink-0"
+            data-tab="meeting">
+            Titik Kumpul
+            <span
+              class="absolute bottom-0 left-0 w-full h-[2px] bg-brand-red scale-x-0 transition-transform duration-300 origin-left"
+              id="modalTabIndicator-meeting"></span>
+          </button>
+          <button onclick="switchModalTab('reviews')"
+            class="modal-tab-btn pb-3 text-sm font-display tracking-widest uppercase transition-all relative font-semibold text-brand-gray hover:text-brand-charcoal shrink-0"
+            data-tab="reviews">
+            Ulasan Wisatawan
+            <span
+              class="absolute bottom-0 left-0 w-full h-[2px] bg-brand-red scale-x-0 transition-transform duration-300 origin-left"
+              id="modalTabIndicator-reviews"></span>
+          </button>
+        </div>
+
+        <!-- Tab contents container -->
+        <div id="modalTabContent" class="flex-grow mb-8">
+
+          <!-- Itinerary -->
+          <div id="tabContent-itinerary" class="tab-pane space-y-6">
+            <!-- Rendered by JS -->
+          </div>
+
+          <!-- Facilities -->
+          <div id="tabContent-facilities" class="tab-pane hidden space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+                <h4
+                  class="text-sm font-display tracking-wider uppercase font-semibold text-emerald-600 mb-4 flex items-center space-x-2">
+                  <i data-lucide="check-circle" class="w-4 h-4"></i>
+                  <span>SUDAH TERMASUK (INCLUDE)</span>
+                </h4>
+                <ul class="space-y-2.5 text-sm text-brand-gray" id="modalIncludesList">
+                  <!-- JS Rendered -->
+                </ul>
+              </div>
+              <div class="bg-slate-50 border border-slate-200 rounded-xl p-5">
+                <h4
+                  class="text-sm font-display tracking-wider uppercase font-semibold text-brand-red mb-4 flex items-center space-x-2">
+                  <i data-lucide="x-circle" class="w-4 h-4"></i>
+                  <span>TIDAK TERMASUK (EXCLUDE)</span>
+                </h4>
+                <ul class="space-y-2.5 text-sm text-brand-gray" id="modalExcludesList">
+                  <!-- JS Rendered -->
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Meeting Point -->
+          <div id="tabContent-meeting" class="tab-pane hidden space-y-6">
+            <div
+              class="bg-slate-50 border border-slate-200 rounded-xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+              <div class="space-y-3">
+                <div class="flex items-center space-x-2 text-brand-red">
+                  <i data-lucide="map-pin" class="w-5 h-5"></i>
+                  <span class="text-sm font-display uppercase tracking-widest font-semibold">Titik Kumpul Utama</span>
+                </div>
+                <h4 class="text-lg font-bold text-brand-charcoal" id="modalMeetingPointTitle"></h4>
+                <p class="text-sm text-brand-gray leading-relaxed">Diharapkan peserta berkumpul maksimal 30 menit
+                  sebelum jadwal keberangkatan untuk koordinasi barang bawaan dan registrasi ulang.</p>
+              </div>
+            </div>
+            <!-- Styled Simulated Map view -->
+            <div
+              class="relative h-48 rounded-xl overflow-hidden border border-slate-200 bg-slate-100 flex items-center justify-center text-center p-6">
+              <div class="absolute inset-0 bg-cover bg-center filter opacity-20"
+                style="background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=800');">
+              </div>
+              <div class="relative z-10 space-y-2 max-w-md">
+                <i data-lucide="navigation" class="w-8 h-8 text-brand-red mx-auto animate-bounce"></i>
+                <p class="text-xs font-display tracking-wider uppercase text-brand-charcoal font-bold">TripQu Navigation
+                  Guide Activated</p>
+                <p class="text-[11px] text-brand-gray">Lokasi titik kumpul digital presisi akan dikirimkan melalui grup
+                  koordinasi WhatsApp H-3 sebelum keberangkatan.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reviews -->
+          <div id="tabContent-reviews" class="tab-pane hidden space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+              <div class="md:col-span-4 bg-slate-50 border border-slate-200 rounded-xl p-5 text-center space-y-2">
+                <span class="text-xs text-brand-gray font-display tracking-wider uppercase font-semibold">Rata-rata
+                  Rating</span>
+                <h4 class="text-5xl font-display font-black text-brand-charcoal" id="reviewsAverageText">4.9</h4>
+                <div class="flex justify-center text-amber-400 animate-pulse" id="reviewsStarsSummary">
+                  <!-- Rendered dynamically -->
+                </div>
+                <p class="text-[10px] text-brand-gray" id="reviewsCountText">(2 Ulasan)</p>
+              </div>
+
+              <div class="md:col-span-8 bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-4">
+                <h4 class="text-xs font-display tracking-widest uppercase font-bold text-brand-charcoal">Tulis Ulasan
+                  Baru</h4>
+                <form onsubmit="handleReviewSubmit(event)" class="space-y-3">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <input type="text" id="reviewAuthor" placeholder="Nama Anda" required
+                      class="bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-brand-charcoal focus:outline-none focus:border-brand-red">
+                    <div class="flex items-center space-x-1 bg-white border border-slate-200 rounded-lg px-3 py-2">
+                      <span class="text-xs text-brand-gray mr-2 select-none">Rating:</span>
+                      <div class="flex items-center space-x-1 text-slate-350" id="starSelectorContainer">
+                        <button type="button" onclick="setSelectRating(1)"
+                          class="focus:outline-none hover:scale-110 transition-transform"><i data-lucide="star"
+                            class="w-4 h-4 fill-current star-select" data-val="1"></i></button>
+                        <button type="button" onclick="setSelectRating(2)"
+                          class="focus:outline-none hover:scale-110 transition-transform"><i data-lucide="star"
+                            class="w-4 h-4 fill-current star-select" data-val="2"></i></button>
+                        <button type="button" onclick="setSelectRating(3)"
+                          class="focus:outline-none hover:scale-110 transition-transform"><i data-lucide="star"
+                            class="w-4 h-4 fill-current star-select" data-val="3"></i></button>
+                        <button type="button" onclick="setSelectRating(4)"
+                          class="focus:outline-none hover:scale-110 transition-transform"><i data-lucide="star"
+                            class="w-4 h-4 fill-current star-select" data-val="4"></i></button>
+                        <button type="button" onclick="setSelectRating(5)"
+                          class="focus:outline-none hover:scale-110 transition-transform"><i data-lucide="star"
+                            class="w-4 h-4 fill-current star-select" data-val="5"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                  <textarea id="reviewComment" rows="2.5" placeholder="Tulis komentar ulasan Anda mengenai trip ini..."
+                    required
+                    class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-brand-charcoal resize-none focus:outline-none focus:border-brand-red"></textarea>
+                  <button type="submit"
+                    class="px-4 py-2 bg-brand-red hover:bg-brand-red-hover text-white text-xs font-display tracking-widest uppercase font-bold rounded-lg transition-colors cursor-pointer">
+                    Kirim Ulasan
+                  </button>
+                </form>
+              </div>
+            </div>
+            <hr class="border-slate-200">
+            <div class="space-y-4 max-h-64 overflow-y-auto pr-2" id="modalReviewsList" style="scrollbar-width: thin;">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Sticky Detail Bottom Panel -->
+        <div class="border-t border-slate-200 p-5 mt-auto flex items-center justify-between bg-slate-50 rounded-xl">
+          <div>
+            <span class="text-[10px] text-brand-gray uppercase tracking-widest font-semibold block">Harga Mulai
+              Dari</span>
+            <span class="text-2xl font-display font-black text-brand-red" id="modalBasePriceDetail">Rp 1.850.000</span>
+            <span class="text-[10px] text-brand-gray">/ pax</span>
+          </div>
+
+          <button onclick="setModalStep(2)"
+            class="px-7 py-3.5 bg-brand-red hover:bg-brand-red-hover text-white text-xs font-display tracking-widest uppercase font-bold rounded-lg shadow-md shadow-brand-red/10 hover:shadow-brand-red/20 transition-all flex items-center space-x-2 cursor-pointer transform hover:-translate-y-0.5">
+            <span>Pesan Sekarang</span>
+            <i data-lucide="arrow-right" class="w-4 h-4 text-white"></i>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- ================= SCREEN 2: BOOKING FORM ================= -->
+      <div id="modalBookingScreen" class="w-full hidden flex-col max-h-[90vh] overflow-y-auto p-6 md:p-8"
+        style="scrollbar-width: thin;">
+
+        <!-- Back navigation -->
+        <button onclick="setModalStep(1)"
+          class="flex items-center space-x-2 text-xs font-display font-bold uppercase tracking-wider text-brand-gray hover:text-brand-charcoal focus:outline-none mb-6 cursor-pointer self-start">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          <span>Kembali ke Detail Wisata</span>
+        </button>
+
+        <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-200">
+          <div>
+            <h4 class="text-xl font-display font-black text-brand-charcoal uppercase tracking-wider">Formulir Pemesanan
+            </h4>
+            <p class="text-xs text-brand-gray mt-1" id="bookingDestName">Trip: Nusa Penida Island</p>
+          </div>
+          <div class="text-right">
+            <span class="text-[10px] text-brand-gray font-display uppercase tracking-widest">Mulai Dari</span>
+            <p class="text-xl font-display font-black text-brand-red" id="modalBasePriceDisplay"></p>
+          </div>
+        </div>
+
+        <!-- Booking Form Inputs -->
+        <form id="bookingForm" onsubmit="handleBookingSubmit(event)" class="space-y-4 pb-12">
+
+          <div>
+            <label class="block text-xs font-display tracking-wider uppercase text-brand-gray mb-1.5 font-bold">Nama
+              Pemesan</label>
+            <input type="text" required id="bookingName" placeholder="Masukkan nama lengkap sesuai KTP"
+              class="w-full bg-white border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-brand-charcoal focus:outline-none focus:border-brand-red/50 transition-all">
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-display tracking-wider uppercase text-brand-gray mb-1.5 font-bold">Alamat
+                Email</label>
+              <input type="email" required id="bookingEmail" placeholder="nama@email.com"
+                class="w-full bg-white border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-brand-charcoal focus:outline-none focus:border-brand-red/50 transition-all">
+            </div>
+            <div>
+              <label class="block text-xs font-display tracking-wider uppercase text-brand-gray mb-1.5 font-bold">Nomor
+                WhatsApp</label>
+              <input type="tel" required id="bookingPhone" placeholder="Contoh: 08123456789"
+                class="w-full bg-white border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-brand-charcoal focus:outline-none focus:border-brand-red/50 transition-all">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label
+                class="block text-xs font-display tracking-wider uppercase text-brand-gray mb-1.5 font-bold">Tanggal
+                Perjalanan</label>
+              <input type="date" required id="bookingDate"
+                class="w-full bg-white border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-brand-charcoal focus:outline-none focus:border-brand-red/50 transition-all cursor-pointer">
+            </div>
+
+            <div>
+              <label class="block text-xs font-display tracking-wider uppercase text-brand-gray mb-1.5 font-bold">Jumlah
+                Peserta (Pax)</label>
+              <div class="flex items-center border border-slate-200 rounded-lg bg-white overflow-hidden h-[42px]">
+                <button type="button" onclick="adjustPax(-1)"
+                  class="w-12 h-full flex items-center justify-center hover:bg-slate-100 text-brand-charcoal border-r border-slate-200 transition-colors focus:outline-none">-</button>
+                <input type="number" readonly id="bookingPax" min="1" max="10" value="1"
+                  class="w-full text-center text-sm font-bold bg-transparent text-brand-charcoal focus:outline-none">
+                <button type="button" onclick="adjustPax(1)"
+                  class="w-12 h-full flex items-center justify-center hover:bg-slate-100 text-brand-charcoal border-l border-slate-200 transition-colors focus:outline-none">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-2 text-xs text-brand-red font-bold" id="remainingSeatsWarning">
+            <i data-lucide="info" class="w-3.5 h-3.5"></i>
+            <span id="seatsTextDisplay">Sisa 4 kursi tersedia</span>
+          </div>
+
+          <div>
+            <label
+              class="block text-xs font-display tracking-wider uppercase text-brand-gray mb-1.5 font-bold">Permintaan
+              Khusus (Opsional)</label>
+            <textarea id="bookingRequests" rows="2" placeholder="Catatan makanan, kebutuhan medis, dll."
+              class="w-full bg-white border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-brand-charcoal focus:outline-none focus:border-brand-red/50 transition-all resize-none"></textarea>
+          </div>
+
+          <!-- Cost calculation panel -->
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-2 mt-4 shadow-sm">
+            <div class="flex justify-between text-xs text-brand-gray font-semibold">
+              <span id="calcLabelPax">Biaya Dasar (1 Pax)</span>
+              <span id="calcBaseCost">Rp 0</span>
+            </div>
+            <div class="flex justify-between text-xs text-brand-gray font-semibold">
+              <span>Biaya Layanan & Pajak</span>
+              <span id="calcTaxCost">Rp 0</span>
+            </div>
+            <hr class="border-slate-200 my-1">
+            <div class="flex justify-between text-sm font-bold text-brand-charcoal">
+              <span>Total Pembayaran</span>
+              <span id="calcTotalCost" class="text-brand-red font-black">Rp 0</span>
+            </div>
+          </div>
+
+          <!-- Checkout submission button (Highly visible solid red) -->
+          <button type="submit"
+            class="w-full py-4 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-display tracking-widest uppercase font-black transition-all duration-300 shadow-lg shadow-brand-red/20 flex items-center justify-center space-x-2 cursor-pointer mt-4"
+            id="submitBtn">
+            <i data-lucide="credit-card" class="w-4.5 h-4.5 text-white"></i>
+            <span>Bayar & Konfirmasi Pemesanan</span>
+          </button>
+
+        </form>
+
+      </div>
+
+      <!-- ================= SCREEN 3: SUCCESS PAYMENT INVOICE ================= -->
+      <div id="modalSuccessScreen" class="w-full hidden flex-col max-h-[90vh] overflow-y-auto p-6 md:p-8"
+        style="scrollbar-width: thin;">
+
+        <div class="text-center py-6 space-y-4">
+          <div
+            class="w-16 h-16 rounded-full bg-emerald-100 border border-emerald-300 flex items-center justify-center mx-auto text-emerald-600 shadow-lg shadow-emerald-500/5 animate-bounce">
+            <i data-lucide="check" class="w-8 h-8"></i>
+          </div>
+          <div class="space-y-1">
+            <h4 class="text-xl font-display font-black text-brand-charcoal uppercase tracking-wider">Pembayaran Sukses!
+            </h4>
+            <p class="text-xs text-brand-gray">Pemesanan Open Trip Anda telah berhasil kami verifikasi secara instan.
+            </p>
+          </div>
+        </div>
+
+        <!-- Receipt / Invoice Card -->
+        <div
+          class="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-4 text-xs font-mono relative overflow-hidden"
+          id="receiptArea">
+          <div class="absolute top-0 left-0 w-full h-1 bg-brand-red"></div>
+
+          <div class="flex justify-between border-b border-slate-200 pb-2">
+            <span class="text-brand-gray font-bold">TRIPQU INVOICE</span>
+            <span id="invoiceId" class="text-brand-red font-black">TQ-124987</span>
+          </div>
+
+          <div class="space-y-2 text-brand-charcoal">
+            <div class="flex justify-between">
+              <span class="text-brand-gray">Nama Pemesan:</span>
+              <span id="invoiceName" class="font-bold">John Doe</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-brand-gray">WhatsApp:</span>
+              <span id="invoicePhone" class="font-bold">08123456789</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-brand-gray">Destinasi:</span>
+              <span id="invoiceDest" class="font-bold">Nusa Penida Island</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-brand-gray">Tanggal Trip:</span>
+              <span id="invoiceDate" class="font-bold">2026-07-15</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-brand-gray">Peserta:</span>
+              <span id="invoicePax" class="font-bold">2 Pax</span>
+            </div>
+          </div>
+
+          <div class="border-t border-dashed border-slate-300 my-2"></div>
+
+          <div class="space-y-2">
+            <div class="flex justify-between text-brand-charcoal">
+              <span class="text-brand-gray">Biaya Dasar:</span>
+              <span id="invoiceBaseCost" class="font-bold">Rp 3.700.000</span>
+            </div>
+            <div class="flex justify-between text-brand-charcoal">
+              <span class="text-brand-gray">Pajak & Layanan:</span>
+              <span id="invoiceTaxCost" class="font-bold">Rp 150.000</span>
+            </div>
+            <div class="flex justify-between font-bold border-t border-slate-200 pt-2 text-sm text-brand-charcoal">
+              <span>TOTAL BIAYA:</span>
+              <span id="invoiceTotalCost" class="text-brand-red font-black">Rp 3.850.000</span>
+            </div>
+          </div>
+
+          <!-- Bottom barcode mock -->
+          <div class="pt-4 flex flex-col items-center justify-center space-y-1.5 border-t border-slate-200">
+            <div class="w-full h-8 bg-slate-900 flex items-center justify-around px-2 py-1 rounded">
+              <div class="flex space-x-[2px] w-full justify-center">
+                <div class="h-6 w-1 bg-white"></div>
+                <div class="h-6 w-0.5 bg-white"></div>
+                <div class="h-6 w-1.5 bg-white"></div>
+                <div class="h-6 w-0.5 bg-white"></div>
+                <div class="h-6 w-1 bg-white"></div>
+                <div class="h-6 w-2 bg-white"></div>
+                <div class="h-6 w-0.5 bg-white"></div>
+                <div class="h-6 w-1.5 bg-white"></div>
+                <div class="h-6 w-0.5 bg-white"></div>
+                <div class="h-6 w-2 bg-white"></div>
+                <div class="h-6 w-1 bg-white"></div>
+                <div class="h-6 w-0.5 bg-white"></div>
+              </div>
+            </div>
+            <span class="text-[9px] text-brand-gray select-none font-semibold">*Simpan invoice ini sebagai tanda bukti
+              boarding trip.</span>
+          </div>
+        </div>
+
+        <div class="space-y-3 mt-6">
+          <button onclick="window.print()"
+            class="w-full py-3 rounded-lg bg-slate-50 hover:bg-slate-100 text-brand-charcoal text-xs font-display tracking-widest uppercase font-bold border border-slate-200 transition-all flex items-center justify-center space-x-2 cursor-pointer">
+            <i data-lucide="printer" class="w-4 h-4"></i>
+            <span>Cetak Invoice</span>
+          </button>
+
+          <button onclick="resetBooking()"
+            class="w-full py-3 rounded-lg bg-brand-red hover:bg-brand-red-hover text-white text-xs font-display tracking-widest uppercase font-bold transition-all duration-300 shadow-md shadow-brand-red/10 cursor-pointer">
+            <span>Kembali ke Detail Trip</span>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= IMMERSIVE MEDIA VIDEO MODAL OVERLAY ================= -->
+  <div id="videoModal"
+    class="fixed inset-0 z-[100] hidden bg-black/90 backdrop-blur-md flex items-center justify-center p-4">
+    <div
+      class="relative w-full max-w-4xl rounded-2xl overflow-hidden border border-slate-800 bg-[#0B0F17] shadow-2xl flex flex-col">
+      <!-- Close Button -->
+      <button onclick="closeVideoPlayer()"
+        class="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-black/50 hover:bg-brand-red/30 text-white hover:text-brand-red flex items-center justify-center transition-all border border-white/20 focus:outline-none">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <!-- Video Iframe Container -->
+      <div class="aspect-video w-full h-full">
+        <iframe id="videoPlayerFrame" class="w-full h-full" src="" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= IMAGE ZOOM LIGHTBOX ================= -->
+  <div id="imageZoomModal"
+    class="fixed inset-0 z-[100] hidden bg-slate-900/90 backdrop-blur-md flex items-center justify-center p-4 cursor-zoom-out"
+    onclick="closeImageZoom()">
+    <button
+      class="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-black/50 hover:bg-brand-red/30 text-white hover:text-brand-red flex items-center justify-center transition-all border border-white/20">
+      <i data-lucide="x" class="w-5 h-5"></i>
+    </button>
+    <img id="zoomedImage" src="" alt="Zoomed view"
+      class="max-w-full max-h-[90vh] object-contain rounded-lg border border-white/15 animate-fade-in shadow-2xl">
+  </div>
+
+  <!-- ================= JAVASCRIPT APP LOGIC ================= -->
+  <script>
+    // Expanded Trip Database with Galleries & High detailed lists
+    const destinations = [
+      {
+        id: "nusa-penida",
+        category: "wide sea",
+        title: "Nusa Penida Island",
+        location: "Klungkung, Bali",
+        rank: "1st Place",
+        badge: "Hot Deal",
+        rating: 4.9,
+        likes: 124,
+        liked: false,
+        price: 1850000,
+        seatsLeft: 4,
+        image: "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&q=80&w=1200",
+        gallery: [
+          "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&q=80&w=600",
+          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=600",
+          "https://images.unsplash.com/photo-1516690561799-46d8f74f90f6?auto=format&fit=crop&q=80&w=600"
+        ],
+        description: "Nusa Penida adalah pulau terbesar dari tiga pulau di lepas pantai tenggara Bali. Terkenal dengan tebing pantainya yang menakjubkan, air jernih, dan kehidupan bawah laut yang luar biasa seperti ikan pari manta raksasa.",
+        itinerary: [
+          { day: "Hari 1", title: "Kedatangan & Eksplorasi Kelingking Beach", activity: "Pukul 07.30 penjemputan di Pelabuhan Sanur, menyeberang menggunakan fast boat. Check-in penginapan AC. Pukul 13.00 menuju Kelingking Beach melihat panorama tebing karang ikonik berbentuk T-Rex, dilanjutkan ke tebing karang berlubang Broken Beach (Pasih Uug) dan kolam alami Angel's Billabong untuk berfoto sore." },
+          { day: "Hari 2", title: "Manta Ray Snorkeling & Sunset di Crystal Bay", activity: "Pukul 08.00 menaiki perahu tradisional menuju Manta Point dan Gamat Bay. Snorkeling berenang bersama pari manta raksasa dan terumbu karang warna-warni. Setelah makan siang ikan bakar lokal, bersantai di pasir putih Crystal Bay sambil menyaksikan matahari terbenam yang syahdu." },
+          { day: "Hari 3", title: "Trekking Tebing Peguyangan & Kembali ke Sanur", activity: "Pukul 08.00 trekking menuruni anak tangga biru ikonik di tebing curam Peguyangan Waterfall untuk melihat mata air suci langsung ke samudera lepas. Setelah makan siang, diantar menuju Pelabuhan Toyapakeh untuk penyeberangan fast boat kembali ke Bali." }
+        ],
+        includes: ["Tiket Fast Boat Sanur - Nusa Penida PP", "Shuttle AC Avanza/APV & Driver + BBM", "Homestay AC (2 malam, twin sharing)", "Tiket Masuk Semua Wisata", "Peralatan Snorkeling Lengkap & Life Jacket", "Dokumentasi Gopro & Kamera DSLR", "Makan 5x sesuai program & Air Mineral"],
+        excludes: ["Tiket Pesawat ke/dari Bali", "Pengeluaran Pribadi (Belanja/Laundry)", "Makan malam di luar program", "Tip Driver & Guide (Sukarela)"],
+        meetingPoint: "Pelabuhan Sanur, Denpasar, Bali",
+        reviews: [
+          { name: "Andi Saputra", rating: 5, date: "24 Juni 2026", comment: "Trip yang luar biasa! Pemandangan Kelingking Beach sangat menakjubkan dan guide dari TripQu sangat ramah membantu mengambil foto." },
+          { name: "Dewi Lestari", rating: 4, date: "15 Mei 2026", comment: "Sangat menyenangkan bisa snorkeling melihat Manta Ray secara langsung. Pelayanan homestay bersih dan ber-AC." }
+        ]
+      },
+      {
+        id: "lake-toba",
+        category: "wide sea",
+        title: "Danau Toba & Samosir",
+        location: "Toba Samosir, Sumatera Utara",
+        rank: "Epic Trip",
+        badge: "Culture & Nature",
+        rating: 4.7,
+        likes: 92,
+        liked: false,
+        price: 2150000,
+        seatsLeft: 6,
+        image: "https://pin.it/7qXJzTeea",
+        gallery: [
+          "https://pin.it/7qXJzTeea",
+          "https://pin.it/2MdoClEwj",
+          "https://pin.it/6kcaC0lBo"
+        ],
+        description: "Danau Toba adalah danau vulkanik raksasa di Sumatera Utara yang terbentang sepanjang 100 kilometer. Dengan Pulau Samosir yang megah di bagian tengahnya, destinasi ini menyajikan warisan budaya Batak yang kental dan pemandangan perbukitan hijau.",
+        itinerary: [
+          { day: "Hari 1", title: "Penjemputan Medan - Parapat - Pulau Samosir", activity: "Penjemputan di Kualanamu Airport Medan pagi hari. Perjalanan darat menuju Parapat melewati perkebunan sawit dan kota Pematang Siantar (makan siang kuliner lokal). Menyeberang ke Pulau Samosir menggunakan kapal feri, check-in resort tepi danau, dilanjutkan makan malam tradisional Batak." },
+          { day: "Hari 2", title: "Wisata Budaya Samosir & Sunset Bukit Holbung", activity: "Pukul 08.30 mengunjungi Desa Adat Tomok untuk melihat makam purba Raja Sidabutar, dilanjutkan ke Simanindo untuk pertunjukan tarian boneka adat Sigale-gale. Sore hari menuju Bukit Holbung, trekking santai menikmati pemandangan Danau Toba 360 derajat." },
+          { day: "Hari 3", title: "Air Terjun Sipiso-Piso - Kembali ke Medan", activity: "Persiapan check-out, kembali menyeberang ke Parapat. Berkendara menuju Air Terjun Sipiso-Piso yang tinggi menjulang di utara Danau Toba. Singgah membeli oleh-oleh khas Sumatera Utara, lalu transfer kembali menuju Bandara Kualanamu Medan." }
+        ],
+        includes: ["Transportasi AC Toyota Hiace PP Medan-Parapat", "Kapal Feri Penyeberangan Samosir PP", "Resort Tepi Danau Toba (2 malam, AC)", "Makan Penuh selama program", "Tiket Masuk Semua Objek Wisata", "Tour Guide Lokal berlisensi HPI"],
+        excludes: ["Tiket Pesawat ke Medan", "Pengeluaran Pribadi", "Makan malam di luar program", "Tips Guide/Driver"],
+        meetingPoint: "Bandara Internasional Kualanamu (KNO) Medan",
+        reviews: [
+          { name: "Budi Cahyono", rating: 5, date: "10 Juni 2026", comment: "Pemandangan dari Bukit Holbung benar-benar spektakuler seperti di Eropa! Sangat merekomendasikan trip ini." },
+          { name: "Rina Marlina", rating: 4, date: "02 Mei 2026", comment: "Sangat edukatif belajar tentang budaya Batak. Feri penyeberangan bersih dan tepat waktu." }
+        ]
+      },
+      {
+        id: "mount-kelimutu",
+        category: "mountains",
+        title: "Gunung Kelimutu",
+        location: "Ende, Flores, NTT",
+        rank: "3rd Place",
+        badge: "Eco Adventure",
+        rating: 4.8,
+        likes: 110,
+        liked: false,
+        price: 2400000,
+        seatsLeft: 3,
+        image: "https://pin.it/48w7FGOOA",
+        gallery: [
+          "https://pin.it/48w7FGOOA",
+          "https://pin.it/3Jstqh1gR",
+          "https://pin.it/3nSJ5LpI7"
+        ],
+        description: "Gunung Kelimutu adalah gunung berapi dekat kota Moni di Kabupaten Ende, Flores, NTT. Sangat terkenal dengan tiga danau kawah berwarna yang selalu berubah warna secara misterius.",
+        itinerary: [
+          { day: "Hari 1", title: "Penjemputan Ende - Perjalanan ke Desa Moni", activity: "Penjemputan di Bandara Ende atau Maumere. Perjalanan menyusuri perbukitan Flores yang berliku nan hijau (singgah berfoto di Pantai Batu Biru). Check-in di Kelimutu Eco Lodge Moni, bersantai menikmati udara sejuk pegunungan." },
+          { day: "Hari 2", title: "Golden Sunrise Kelimutu & Desa Adat Wologai", activity: "Pukul 04.00 pagi bersiap menuju puncak Kelimutu. Trekking ringan 30 menit menyaksikan keindahan matahari terbit berlatar belakang 3 danau kawah berwarna yang misterius. Kembali ke hotel untuk sarapan, dilanjutkan mengunjungi Desa Adat Wologai melihat rumah adat adat suku Lio." },
+          { day: "Hari 3", title: "Belanja Tenun Ikat & Transfer Bandara", activity: "Sarapan pagi, persiapan check-out. Berburu kain tenun ikat Flores buatan tangan warga setempat di pasar Ende. Setelah makan siang, transfer menuju Bandara Ende untuk penerbangan pulang." }
+        ],
+        includes: ["Transportasi Mobil AC Avanza/Innova Flores PP", "Akomodasi Lodge di Moni (2 malam, hot water)", "Tiket Masuk Taman Nasional Kelimutu", "Sarapan & Makan Siang higienis", "Local Guide berlisensi TN Kelimutu", "Air Mineral melimpah selama trip"],
+        excludes: ["Tiket Pesawat ke/dari Flores", "Makan Malam", "Pengeluaran Pribadi & Tips"],
+        meetingPoint: "Bandara H. Hasan Aroeboesman Ende, Flores, NTT",
+        reviews: [
+          { name: "Fajar Nugraha", rating: 5, date: "18 Juni 2026", comment: "Melihat langsung 3 warna kawah Kelimutu adalah impian yang terwujud. Trekkingnya mudah dan udaranya segar." }
+        ]
+      },
+      {
+        id: "bromo-tengger",
+        category: "mountains",
+        title: "Gunung Bromo",
+        location: "Probolinggo, Jawa Timur",
+        rank: "4th Place",
+        badge: "Popular",
+        rating: 4.8,
+        likes: 350,
+        liked: false,
+        price: 950000,
+        seatsLeft: 8,
+        image: "https://pin.it/4qVzeJm7l",
+        gallery: [
+          "https://pin.it/4qVzeJm7l",
+          "https://pin.it/6kUejyte2",
+          "https://pin.it/6Vu2ZnHWM"
+        ],
+        description: "Gunung Bromo adalah gunung berapi aktif di Jawa Timur yang terkenal dengan lautan pasirnya yang luas dan panorama sunrise legendaris berlatar belakang Gunung Semeru.",
+        itinerary: [
+          { day: "Hari 1", title: "Midnight Pick-Up & Perjalanan Transit Bromo", activity: "Pukul 23.30 penjemputan peserta di Bandara/Stasiun Malang atau Surabaya. Perjalanan darat malam hari menggunakan shuttle AC prima menuju transit area Bromo di Sukapura/Tumpang." },
+          { day: "Hari 2", title: "Jeep 4x4 Tour, Sunrise & Eksplorasi Kawah", activity: "Pukul 03.00 transfer ke Jeep 4x4. Menuju Penanjakan 1/Bukit Kingkong menyaksikan Golden Sunrise legendaris. Turun melintasi Lautan Pasir menuju Kawah Bromo (trekking/naik kuda), berfoto di Pura Luhur Poten, Pasir Berbisik, dan Bukit Teletubbies yang hijau. Kembali ke Malang sore hari." }
+        ],
+        includes: ["Transportasi AC Penjemputan PP Surabaya/Malang", "Jeep Bromo 4x4 Exclusive (1 Jeep isi 5-6 orang)", "Tiket Masuk TN Bromo Tengger Semeru", "Driver Jeep profesional + BBM", "Guide Lokal", "Air Mineral & Snack Box"],
+        excludes: ["Sewa Kuda di Bromo", "Pengeluaran Pribadi", "Makan Utama", "Tipping"],
+        meetingPoint: "Stasiun Malang / Bandara Juanda Surabaya",
+        reviews: [
+          { name: "Lia Maharani", rating: 5, date: "21 Juni 2026", comment: "Bromo tidak pernah mengecewakan. Jeepnya bersih dan driver sangat lihai melewati pasir berbisik." },
+          { name: "Eko Prasetyo", rating: 4, date: "11 Mei 2026", comment: "Sunrise sangat indah, namun agak padat pengunjung. Tetap sangat layak dicoba sekali seumur hidup!" }
+        ]
+      },
+      {
+        id: "raja-ampat",
+        category: "island",
+        title: "Piaynemo Raja Ampat",
+        location: "Raja Ampat, Papua Barat",
+        rank: "2nd Place",
+        badge: "Bucket List",
+        rating: 5.0,
+        likes: 215,
+        liked: false,
+        price: 6500000,
+        seatsLeft: 2,
+        image: "https://pin.it/6jkM0NtPn",
+        gallery: [
+          "https://pin.it/6jkM0NtPn",
+          "https://pin.it/6jkM0NtPn",
+          "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&q=80&w=600"
+        ],
+        description: "Kepulauan Raja Ampat di Papua Barat adalah surga bawah laut dunia yang memiliki keanekaragaman terumbu karang tertinggi. Pemandangan bukit karst Piaynemo yang tersohor merupakan salah satu keajaiban alam tercantik Indonesia.",
+        itinerary: [
+          { day: "Hari 1", title: "Sorong - Waisai Pelabuhan - Cottage Resort", activity: "Penjemputan di Bandara DEO Sorong pagi hari. Menuju pelabuhan naik Kapal Cepat Bahari Express menuju Waisai (2 jam). Transfer menggunakan speedboat resort menuju Cottage tepi laut. Makan malam seafood segar." },
+          { day: "Hari 2", title: "Trekking Karst Piaynemo & Telaga Bintang", activity: "Pukul 08.00 trekking menaiki 300 anak tangga kayu menuju gardu pandang Piaynemo melihat gugusan pulau karang di laut biru. Berfoto di Telaga Bintang (teluk berbentuk bintang), snorkeling di dermaga Piaynemo." },
+          { day: "Hari 3", title: "Pasir Timbul - Arborek - Sauwandarek Turtle Bay", activity: "Pukul 08.00 mengunjungi Pasir Timbul di tengah laut. Snorkeling bersama kawanan penyu di terumbu karang Sauwandarek, bermain bersama anak-anak lokal di Desa Arborek." },
+          { day: "Hari 4", title: "Waisai - Sorong - Kepulangan", activity: "Sarapan pagi, check-out resort. Naik kapal cepat kembali ke Sorong. Pengantaran ke Bandara Sorong atau hotel terdekat. Trip selesai." }
+        ],
+        includes: ["Tiket Kapal Cepat Executive VIP Sorong-Waisai PP", "Speedboat Private Tour Raja Ampat selama program", "Resort Cottage Tepi Pantai (3 malam, AC)", "Makan Penuh (Breakfast, Lunch, Dinner chef resort)", "Peralatan Snorkeling Lengkap & Pelampung", "Pemandu Lokal Berlisensi", "PIN Raja Ampat (KSDP Pariwisata)"],
+        excludes: ["Tiket Pesawat ke Sorong", "Peralatan Diving", "Pengeluaran Pribadi", "Tipping Crew Kapal"],
+        meetingPoint: "Bandara Domine Eduard Osok (DEO) Sorong, Papua Barat",
+        reviews: [
+          { name: "Galih Perkasa", rating: 5, date: "15 Juni 2026", comment: "Tempat terindah di bumi! Snorkeling di Sauwandarek seperti berenang di dalam akuarium raksasa." },
+          { name: "Amelia Putri", rating: 5, date: "29 Mei 2026", comment: "Resort tepi pantai sangat tenang dan makanannya lezat. Pelayanan TripQu berkelas dunia." }
+        ]
+      },
+      {
+        id: "komodo-island",
+        category: "island",
+        title: "Taman Nasional Komodo",
+        location: "Labuan Bajo, Flores, NTT",
+        rank: "Featured",
+        badge: "Best Seller",
+        rating: 4.9,
+        likes: 188,
+        liked: false,
+        price: 3800000,
+        seatsLeft: 5,
+        image: "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&q=80&w=1200",
+        gallery: [
+          "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&q=80&w=600",
+          "https://pin.it/6jkM0NtPn",
+          "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=600"
+        ],
+        description: "Taman Nasional Komodo di Flores menawarkan petualangan pelayaran kapal phinisi (Live On Board) tak terlupakan. Kunjungi Pulau Padar untuk tracking pemandangan tiga teluk, snorkeling di pantai berpasir merah muda, dan melihat kadal raksasa Komodo.",
+        itinerary: [
+          { day: "Hari 1", title: "Labuan Bajo Pelabuhan - Pulau Kelor - Kalong", activity: "Pukul 09.00 penjemputan bandara/hotel menuju dermaga phinisi. Berlayar menuju Pulau Kelor (trekking bukit terjal panorama pantai), snorkeling di terumbu karang Manjarite. Pukul 18.00 bersandar di Pulau Kalong menyaksikan jutaan kelelawar terbang menghias sunset." },
+          { day: "Hari 2", title: "Sunrise Pulau Padar - Pink Beach - Komodo Dragon", activity: "Pukul 05.00 trekking mendaki Puncak Pulau Padar menikmati pemandangan ikonik 3 teluk berwarna berbeda. Dilanjutkan bersantai di Pink Beach, lalu mengunjungi Pulau Komodo mencari kadal purba Komodo dipandu ranger." },
+          { day: "Hari 3", title: "Snorkeling Manta Point & Pasir Tembul Makassar", activity: "Pukul 08.00 snorkeling bersama Pari Manta raksasa di Manta Point, disusul berfoto di Taka Makassar (pulau pasir tak berpenghuni). Pukul 14.00 kembali ke pelabuhan Labuan Bajo, transfer ke bandara." }
+        ],
+        includes: ["Sewa Kapal Semi Phinisi Living On Board (3D2N AC)", "Makan Penuh di Kapal (Breakfast, Lunch, Dinner plus Chef on Board)", "Kabin AC Nyaman & Kamar Mandi Dalam", "Alat Snorkeling & Pelampung", "Dokumentasi Drone & Gopro + Kamera Mirrorless", "Guide & Ranger Balai Taman Nasional Komodo"],
+        excludes: ["Tiket Masuk TN Komodo (WNI/WNA)", "Tiket Pesawat ke Labuan Bajo", "Pengeluaran Pribadi", "Tipping Guide & Kru Kapal"],
+        meetingPoint: "Bandara Komodo / Hotel Labuan Bajo, NTT",
+        reviews: [
+          { name: "Dimas Wibowo", rating: 5, date: "05 Juni 2026", comment: "Pengalaman phinisi yang luar biasa! Kamar AC dingin, makanan chef bintang lima, dan pemandangan Padar tidak tertandingi." }
+        ]
+      }
+    ];
+
+    // Wishlist Array State
+    let wishlist = [];
+
+    // App State Management
+    let currentCategory = "wide sea";
+    let activeSlideIndex = 0;
+    let categoryDestinations = [];
+    let currentSelectedTrip = null;
+    let selectedModalTab = "itinerary";
+    let activeReviewRating = 5; // Default review score selector
+
+    // Setup and initialization
+    window.addEventListener("DOMContentLoaded", () => {
+      // Initialize icons
+      lucide.createIcons();
+
+      // Update UI components
+      switchCategory("wide sea");
+      renderGrid();
+
+      // Setup minimum date picker restriction
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      const tomorrowFormatted = tomorrow.toISOString().split("T")[0];
+      const dateInput = document.getElementById("bookingDate");
+      if (dateInput) {
+        dateInput.min = tomorrowFormatted;
+      }
+
+      // Load Wishlist from Storage if exists
+      const savedWishlist = localStorage.getItem("tripqu_wishlist");
+      if (savedWishlist) {
+        wishlist = JSON.parse(savedWishlist);
+        updateWishlistBadge();
+        // Sync database state
+        destinations.forEach(d => {
+          if (wishlist.includes(d.id)) {
+            d.liked = true;
+          }
+        });
+      }
+    });
+
+    // Mobile Navbar toggle
+    function toggleMobileNav() {
+      const menu = document.getElementById("mobileMenu");
+      menu.classList.toggle("hidden");
+    }
+
+    // Category Switching Logic
+    function switchCategory(category) {
+      currentCategory = category;
+      activeSlideIndex = 0;
+
+      // Update Navigation styling
+      const tabs = document.querySelectorAll(".cat-tab-btn");
+      tabs.forEach(tab => {
+        const cat = tab.getAttribute("data-category");
+        const indicator = document.getElementById(`indicator-${cat}`);
+        if (cat === category) {
+          tab.classList.add("active", "text-brand-charcoal");
+          tab.classList.remove("text-brand-gray");
+          if (indicator) indicator.style.transform = "scaleX(1)";
+        } else {
+          tab.classList.remove("active", "text-brand-charcoal");
+          tab.classList.add("text-brand-gray");
+          if (indicator) indicator.style.transform = "scaleX(0)";
+        }
+      });
+
+      // Filter destinations for Hero Section slider
+      categoryDestinations = destinations.filter(d => d.category === category);
+
+      // Populate Indicators & Previews in the bottom of hero
+      updateHeroSlider();
+      applyFilters(); // Sync recommendation grid focus too!
+    }
+
+    // Hero Slider Updates
+    function updateHeroSlider() {
+      if (categoryDestinations.length === 0) return;
+
+      const activeTrip = categoryDestinations[activeSlideIndex];
+      currentSelectedTrip = activeTrip;
+
+      // Update Backdrop photo
+      const backdrop = document.getElementById("hero-backdrop");
+      backdrop.style.backgroundImage = `url('${activeTrip.image}')`;
+
+      // Reset animations
+      const detailsContainer = document.getElementById("hero-destination-details");
+      detailsContainer.classList.remove("animate-fade-in");
+      void detailsContainer.offsetWidth; // Trigger reflow
+      detailsContainer.classList.add("animate-fade-in");
+
+      // Update text values
+      document.getElementById("hero-dest-title").innerText = activeTrip.title;
+
+      // Update vertical numeric steps (e.g. 03, 04, 05, etc.)
+      const indicatorsContainer = document.getElementById("hero-slider-indicators");
+      indicatorsContainer.innerHTML = "";
+
+      const baseIndex = activeSlideIndex + 3; // start numbering from 03, 04, 05...
+
+      for (let i = -2; i <= 2; i++) {
+        const num = baseIndex + i;
+        const paddedNum = num < 10 ? `0${num}` : num;
+
+        const isCurrent = i === 0;
+        const sizeClass = isCurrent ? "text-2xl font-black text-brand-charcoal relative flex items-center justify-end" : "text-sm text-brand-charcoal/30 font-medium";
+        const lineElement = isCurrent ? `<span class="absolute -right-6 w-5 h-[2px] bg-brand-red"></span>` : "";
+
+        indicatorsContainer.innerHTML += `
+          <button onclick="jumpToSlideIndex(${activeSlideIndex + i})" class="transition-all ${sizeClass} focus:outline-none hover:text-brand-red cursor-pointer">
+            ${paddedNum} ${lineElement}
+          </button>
+        `;
+      }
+
+      // Update Progress Bar
+      const progressBar = document.getElementById("hero-progress-bar");
+      const percentage = ((activeSlideIndex + 1) / categoryDestinations.length) * 100;
+      progressBar.style.width = `${percentage}%`;
+      progressBar.style.left = `${(activeSlideIndex / categoryDestinations.length) * 100}%`;
+
+      // Update the 3 Bottom columns previews
+      const colsContainer = document.getElementById("hero-columns-container");
+      colsContainer.innerHTML = "";
+
+      categoryDestinations.forEach((trip, index) => {
+        const isActive = index === activeSlideIndex;
+        const opacityClass = isActive ? "opacity-100" : "opacity-45 hover:opacity-85";
+        const activeBorder = isActive ? "border-brand-red" : "border-transparent";
+
+        colsContainer.innerHTML += `
+          <div onclick="jumpToSlideIndex(${index})" class="cursor-pointer transition-all duration-300 border-l-2 pl-4 ${activeBorder} ${opacityClass} space-y-2">
+            <h4 class="text-sm font-display font-bold text-brand-charcoal uppercase tracking-wider">${trip.title}</h4>
+            <p class="text-xs text-brand-gray line-clamp-2 leading-relaxed font-medium">${trip.description}</p>
+          </div>
+        `;
+      });
+    }
+
+    // Hero Navigation Actions
+    function nextSlide() {
+      activeSlideIndex = (activeSlideIndex + 1) % categoryDestinations.length;
+      updateHeroSlider();
+    }
+
+    function jumpToSlideIndex(index) {
+      if (index >= 0 && index < categoryDestinations.length) {
+        activeSlideIndex = index;
+        updateHeroSlider();
+      }
+    }
+
+    // Render Grid Cards with Wishlist and Likes Interactions
+    function renderGrid(dataList = destinations) {
+      const grid = document.getElementById("destinations-grid");
+      const noResults = document.getElementById("no-results");
+      grid.innerHTML = "";
+
+      if (dataList.length === 0) {
+        noResults.classList.remove("hidden");
+        return;
+      }
+      noResults.classList.add("hidden");
+
+      dataList.forEach(trip => {
+        const formattedPrice = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(trip.price);
+        const heartFillClass = trip.liked ? "fill-brand-red text-brand-red" : "text-slate-400";
+
+        grid.innerHTML += `
+          <div class="premium-card flex flex-col h-full bg-white rounded-xl overflow-hidden relative group shadow-sm">
+            
+            <!-- Cover image area -->
+            <div class="relative h-72 overflow-hidden bg-slate-100">
+              <img src="${trip.image}" alt="${trip.title}" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+              
+              <!-- Hot deal / tags -->
+              <span class="absolute top-4 left-4 bg-brand-red text-white text-[9px] font-display uppercase tracking-widest px-2.5 py-1 rounded font-bold shadow-md shadow-brand-red/10">
+                ${trip.badge}
+              </span>
+              
+              <!-- Remaining seats counter -->
+              <span class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-brand-red text-[10px] font-display uppercase tracking-widest px-2.5 py-1 rounded border border-brand-red/10 font-bold shadow-sm">
+                Sisa ${trip.seatsLeft} Kursi
+              </span>
+              
+              <!-- Interactive Heart (Wishlist / Like) overlay -->
+              <button onclick="toggleLike('${trip.id}', this)" class="absolute bottom-4 right-4 w-9 h-9 rounded-full bg-white/95 backdrop-blur-sm flex items-center justify-center border border-slate-100 hover:scale-110 active:scale-95 transition-all shadow-md focus:outline-none cursor-pointer" title="Sukai Destinasi">
+                <i data-lucide="heart" class="w-4.5 h-4.5 transition-colors ${heartFillClass}"></i>
+              </button>
+            </div>
+
+            <!-- Content Area -->
+            <div class="p-5 flex-grow flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between text-xs text-brand-gray mb-1.5 font-display tracking-widest uppercase font-semibold">
+                  <span>${trip.rank}</span>
+                  <div class="flex items-center space-x-1.5">
+                    <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+                    <span class="text-brand-charcoal font-bold text-[11px]">${trip.rating}</span>
+                  </div>
+                </div>
+
+                <h3 class="text-lg font-bold text-brand-charcoal tracking-wide leading-tight group-hover:text-brand-red transition-colors mb-1.5">
+                  ${trip.title}
+                </h3>
+                
+                <div class="flex items-center space-x-1 text-[11px] text-brand-gray font-semibold">
+                  <i data-lucide="map-pin" class="w-3 h-3 text-brand-red"></i>
+                  <span>${trip.location}</span>
+                </div>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                <div>
+                  <div class="flex items-center space-x-2 text-[10px] text-brand-gray uppercase tracking-wider font-semibold">
+                    <span>Harga Tiket</span>
+                    <span class="flex items-center text-brand-red font-bold">
+                      <i data-lucide="thumbs-up" class="w-3 h-3 mr-0.5 fill-current"></i>
+                      <span class="like-count-display">${trip.likes}</span>
+                    </span>
+                  </div>
+                  <span class="text-base font-display font-black text-brand-charcoal">${formattedPrice}</span>
+                  <span class="text-[10px] text-brand-gray">/ pax</span>
+                </div>
+                
+                <button onclick="openModal('${trip.id}')" class="px-4 py-2 bg-slate-50 hover:bg-brand-red hover:text-white border border-slate-200 hover:border-transparent rounded text-xs font-display tracking-wider uppercase font-bold transition-all cursor-pointer">
+                  Detail Trip
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+        `;
+      });
+
+      lucide.createIcons();
+    }
+
+    // Like Toggle System
+    function toggleLike(tripId, element) {
+      const trip = destinations.find(d => d.id === tripId);
+      if (!trip) return;
+
+      const heartIcon = element.querySelector("svg") || element.querySelector("i");
+      trip.liked = !trip.liked;
+
+      if (trip.liked) {
+        trip.likes += 1;
+        heartIcon.classList.add("fill-brand-red", "text-brand-red", "heart-pop");
+        heartIcon.classList.remove("text-slate-400");
+
+        // Add to Wishlist state
+        if (!wishlist.includes(tripId)) {
+          wishlist.push(tripId);
+        }
+      } else {
+        trip.likes -= 1;
+        heartIcon.classList.remove("fill-brand-red", "text-brand-red", "heart-pop");
+        heartIcon.classList.add("text-slate-400");
+
+        // Remove from Wishlist state
+        wishlist = wishlist.filter(id => id !== tripId);
+      }
+
+      // Save to localStorage
+      localStorage.setItem("tripqu_wishlist", JSON.stringify(wishlist));
+
+      // Refresh like counts in the displays
+      const parentCard = element.closest(".premium-card");
+      if (parentCard) {
+        parentCard.querySelector(".like-count-display").innerText = trip.likes;
+      }
+
+      updateWishlistBadge();
+      renderWishlistItems();
+
+      // Animate heart
+      setTimeout(() => {
+        heartIcon.classList.remove("heart-pop");
+      }, 300);
+    }
+
+    // Modal Wishlist add
+    function toggleModalWishlist() {
+      if (!currentSelectedTrip) return;
+
+      const tripId = currentSelectedTrip.id;
+      const isLiked = wishlist.includes(tripId);
+
+      if (!isLiked) {
+        wishlist.push(tripId);
+        currentSelectedTrip.liked = true;
+        currentSelectedTrip.likes += 1;
+      } else {
+        wishlist = wishlist.filter(id => id !== tripId);
+        currentSelectedTrip.liked = false;
+        currentSelectedTrip.likes -= 1;
+      }
+
+      localStorage.setItem("tripqu_wishlist", JSON.stringify(wishlist));
+
+      updateWishlistBadge();
+      renderWishlistItems();
+      applyFilters(); // Sync main grid
+      updateModalWishlistBtn();
+    }
+
+    function updateModalWishlistBtn() {
+      if (!currentSelectedTrip) return;
+      const btn = document.getElementById("modalWishlistBtn");
+      const text = document.getElementById("modalWishlistText");
+      if (!btn) return;
+      const heartIcon = btn.querySelector("svg") || btn.querySelector("i");
+
+      const isWishlisted = wishlist.includes(currentSelectedTrip.id);
+      if (isWishlisted) {
+        text.innerText = "Wishlisted";
+        btn.classList.add("text-brand-red", "border-brand-red/30");
+        heartIcon.classList.add("fill-brand-red", "text-brand-red");
+        heartIcon.classList.remove("text-slate-400");
+      } else {
+        text.innerText = "Wishlist";
+        btn.classList.remove("text-brand-red", "border-brand-red/30");
+        heartIcon.classList.remove("fill-brand-red", "text-brand-red");
+        heartIcon.classList.add("text-slate-400");
+      }
+    }
+
+    // Wishlist Drawer Control
+    function toggleWishlistDrawer() {
+      const drawer = document.getElementById("wishlistDrawer");
+      const overlay = document.getElementById("wishlistDrawerOverlay");
+
+      overlay.classList.toggle("hidden");
+      drawer.classList.toggle("translate-x-full");
+
+      if (!drawer.classList.contains("translate-x-full")) {
+        renderWishlistItems();
+      }
+    }
+
+    function updateWishlistBadge() {
+      const badge = document.getElementById("wishlistBadgeCount");
+      const count = wishlist.length;
+      document.getElementById("wishlistTotalCount").innerText = `${count} Destinasi`;
+
+      if (count > 0) {
+        badge.innerText = count;
+        badge.classList.remove("scale-0");
+        badge.classList.add("scale-100");
+      } else {
+        badge.classList.remove("scale-100");
+        badge.classList.add("scale-0");
+      }
+    }
+
+    function renderWishlistItems() {
+      const itemsContainer = document.getElementById("wishlistDrawerItems");
+      itemsContainer.innerHTML = "";
+
+      if (wishlist.length === 0) {
+        itemsContainer.innerHTML = `
+          <div class="text-center py-16 space-y-3">
+            <i data-lucide="heart-off" class="w-10 h-10 text-slate-300 mx-auto"></i>
+            <p class="text-xs text-brand-gray font-semibold">Wishlist Anda kosong.</p>
+            <p class="text-[10px] text-brand-gray/80 leading-relaxed px-6">Sukai beberapa destinasi petualangan impian Anda untuk menambahkannya ke sini.</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      wishlist.forEach(id => {
+        const trip = destinations.find(d => d.id === id);
+        if (!trip) return;
+
+        const formattedPrice = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(trip.price);
+
+        itemsContainer.innerHTML += `
+          <div class="flex items-center space-x-3 p-3 bg-slate-50 border border-slate-200 rounded-lg hover:border-slate-300 transition-colors">
+            <img src="${trip.image}" alt="${trip.title}" class="w-16 h-16 object-cover rounded-md border border-slate-200">
+            <div class="flex-grow min-w-0">
+              <h4 class="text-xs font-bold text-brand-charcoal truncate">${trip.title}</h4>
+              <span class="text-[10px] text-brand-gray block">${trip.location}</span>
+              <span class="text-[11px] font-bold text-brand-red block mt-1">${formattedPrice}</span>
+            </div>
+            <div class="flex flex-col space-y-1.5">
+              <button onclick="closeModal(); openModal('${trip.id}'); toggleWishlistDrawer();" class="p-1.5 rounded bg-brand-charcoal hover:bg-slate-800 text-white transition-colors cursor-pointer" title="Pesan Sekarang">
+                <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
+              </button>
+              <button onclick="removeFromWishlist('${trip.id}')" class="p-1.5 rounded bg-white hover:bg-red-50 text-brand-red border border-slate-200 hover:border-brand-red/20 transition-colors cursor-pointer" title="Hapus">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      lucide.createIcons();
+    }
+
+    function removeFromWishlist(tripId) {
+      wishlist = wishlist.filter(id => id !== tripId);
+      localStorage.setItem("tripqu_wishlist", JSON.stringify(wishlist));
+
+      const trip = destinations.find(d => d.id === tripId);
+      if (trip) {
+        trip.liked = false;
+        trip.likes = Math.max(0, trip.likes - 1);
+      }
+
+      updateWishlistBadge();
+      renderWishlistItems();
+      applyFilters(); // Sync grid cards
+    }
+
+    // Apply Filters & Sorting search
+    function applyFilters() {
+      const searchVal = document.getElementById("searchInput").value.toLowerCase();
+      const sortVal = document.getElementById("sortSelect").value;
+
+      let filtered = destinations.filter(trip => {
+        const matchesCategory = trip.category === currentCategory;
+        const matchesSearch = trip.title.toLowerCase().includes(searchVal) || trip.description.toLowerCase().includes(searchVal) || trip.location.toLowerCase().includes(searchVal);
+        return matchesCategory && matchesSearch;
+      });
+
+      // Sorting
+      if (sortVal === "price-asc") {
+        filtered.sort((a, b) => a.price - b.price);
+      } else if (sortVal === "price-desc") {
+        filtered.sort((a, b) => b.price - a.price);
+      } else if (sortVal === "rating-desc") {
+        filtered.sort((a, b) => b.rating - a.rating);
+      }
+
+      renderGrid(filtered);
+    }
+
+    // Modal Control Logic
+    function openModalFromHero() {
+      if (currentSelectedTrip) {
+        openModal(currentSelectedTrip.id);
+      }
+    }
+
+    function openModal(tripId) {
+      const trip = destinations.find(d => d.id === tripId);
+      if (!trip) return;
+
+      currentSelectedTrip = trip;
+
+      // Update basic fields
+      document.getElementById("modalTripTitle").innerText = trip.title;
+      document.getElementById("modalTripLocation").innerText = trip.location;
+      document.getElementById("modalTripImage").src = trip.image;
+      document.getElementById("modalTripDescription").innerText = trip.description;
+      document.getElementById("modalRankBadge").innerText = trip.rank;
+      document.getElementById("modalCategoryBadge").innerText = trip.category.toUpperCase();
+      document.getElementById("modalRatingText").innerText = trip.rating;
+      document.getElementById("modalMeetingPointTitle").innerText = trip.meetingPoint;
+      document.getElementById("bookingDestName").innerText = `Trip: ${trip.title}`;
+
+      const formattedBasePrice = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(trip.price);
+      document.getElementById("modalBasePriceDisplay").innerText = formattedBasePrice;
+      document.getElementById("modalBasePriceDetail").innerText = formattedBasePrice;
+
+      // Update Wishlist CTA button inside modal
+      updateModalWishlistBtn();
+
+      // Populate Gallery Thumbnails Grid
+      const galleryContainer = document.getElementById("modalGalleryContainer");
+      galleryContainer.innerHTML = "";
+      trip.gallery.forEach(imgUrl => {
+        const isMain = imgUrl === trip.image;
+        const borderClass = isMain ? "border-brand-red scale-95" : "border-slate-200 hover:border-brand-red/50";
+        galleryContainer.innerHTML += `
+          <button onclick="changeModalMainImage('${imgUrl}', this)" class="w-20 h-16 rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${borderClass}">
+            <img src="${imgUrl}" alt="Gallery Thumbnail" class="w-full h-full object-cover">
+          </button>
+        `;
+      });
+
+      // Populate Lists
+      // Includes
+      const includesList = document.getElementById("modalIncludesList");
+      includesList.innerHTML = "";
+      trip.includes.forEach(inc => {
+        includesList.innerHTML += `
+          <li class="flex items-start space-x-2">
+            <i data-lucide="check" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5"></i>
+            <span class="font-medium">${inc}</span>
+          </li>
+        `;
+      });
+
+      // Excludes
+      const excludesList = document.getElementById("modalExcludesList");
+      excludesList.innerHTML = "";
+      trip.excludes.forEach(exc => {
+        excludesList.innerHTML += `
+          <li class="flex items-start space-x-2">
+            <i data-lucide="x" class="w-4 h-4 text-brand-red shrink-0 mt-0.5"></i>
+            <span class="font-medium">${exc}</span>
+          </li>
+        `;
+      });
+
+      // Itineraries
+      const itContent = document.getElementById("tabContent-itinerary");
+      itContent.innerHTML = "";
+      trip.itinerary.forEach((it, idx) => {
+        itContent.innerHTML += `
+          <div class="flex space-x-4 relative">
+            <!-- Timeline dot -->
+            <div class="flex flex-col items-center">
+              <div class="w-8 h-8 rounded-full bg-brand-red/10 border border-brand-red flex items-center justify-center text-brand-red font-bold text-xs shrink-0 z-10">
+                ${idx + 1}
+              </div>
+              ${idx !== trip.itinerary.length - 1 ? '<div class="w-[2px] bg-slate-200 flex-grow my-1"></div>' : ''}
+            </div>
+            
+            <div class="pb-6 space-y-1 flex-grow">
+              <span class="text-[10px] font-display uppercase tracking-widest text-brand-red font-bold">${it.day}</span>
+              <h4 class="text-base font-bold text-brand-charcoal">${it.title}</h4>
+              <p class="text-xs text-brand-gray leading-relaxed font-medium">${it.activity}</p>
+            </div>
+          </div>
+        `;
+      });
+
+      // Render Reviews List & Score summaries
+      renderReviewsTab();
+
+      // Reset form variables
+      document.getElementById("bookingPax").value = 1;
+      document.getElementById("seatsTextDisplay").innerText = `Sisa ${trip.seatsLeft} kursi tersedia`;
+
+      // Set limit on pax stepper
+      adjustPax(0);
+
+      // Clear form inputs
+      document.getElementById("bookingName").value = "";
+      document.getElementById("bookingEmail").value = "";
+      document.getElementById("bookingPhone").value = "";
+      document.getElementById("bookingRequests").value = "";
+      document.getElementById("bookingDate").value = "";
+
+      // Start at Step 1 (Details View)
+      setModalStep(1);
+
+      // Show modal window
+      const modal = document.getElementById("bookingModal");
+      modal.classList.remove("hidden");
+      document.body.style.overflow = "hidden"; // disable body scrolling
+
+      // Force lucide update
+      lucide.createIcons();
+    }
+
+    // Modal navigation steps manager
+    function setModalStep(step) {
+      const s1 = document.getElementById("modalDetailScreen");
+      const s2 = document.getElementById("modalBookingScreen");
+      const s3 = document.getElementById("modalSuccessScreen");
+      const wrapper = document.getElementById("modalContent");
+
+      s1.classList.add("hidden");
+      s2.classList.add("hidden");
+      s3.classList.add("hidden");
+
+      if (step === 1) {
+        s1.classList.remove("hidden");
+        wrapper.style.maxWidth = "56rem"; // max-w-4xl
+      } else if (step === 2) {
+        s2.classList.remove("hidden");
+        wrapper.style.maxWidth = "42rem"; // max-w-2xl
+        calculatePricing(); // Trigger initial calculator refresh
+      } else if (step === 3) {
+        s3.classList.remove("hidden");
+        wrapper.style.maxWidth = "32rem"; // max-w-md
+      }
+
+      // Scroll to top
+      s1.scrollTop = 0;
+      s2.scrollTop = 0;
+      s3.scrollTop = 0;
+
+      lucide.createIcons();
+    }
+
+    // Interactive thumbnail photo swapper
+    function changeModalMainImage(src, btnElement) {
+      document.getElementById("modalTripImage").src = src;
+
+      // Reset active border class on siblings
+      const btns = document.querySelectorAll("#modalGalleryContainer button");
+      btns.forEach(btn => {
+        btn.classList.remove("border-brand-red", "scale-95");
+        btn.classList.add("border-slate-200");
+      });
+
+      btnElement.classList.add("border-brand-red", "scale-95");
+      btnElement.classList.remove("border-slate-200");
+    }
+
+    function closeModal() {
+      const modal = document.getElementById("bookingModal");
+      modal.classList.add("hidden");
+      document.body.style.overflow = ""; // enable body scrolling
+    }
+
+    // Modal Tab Switching
+    function switchModalTab(tabId) {
+      selectedModalTab = tabId;
+
+      // Update button styling
+      const buttons = document.querySelectorAll(".modal-tab-btn");
+      buttons.forEach(btn => {
+        const btnTab = btn.getAttribute("data-tab");
+        const indicator = document.getElementById(`modalTabIndicator-${btnTab}`);
+
+        if (btnTab === tabId) {
+          btn.classList.add("active", "text-brand-charcoal", "font-bold");
+          btn.classList.remove("text-brand-gray");
+          if (indicator) indicator.style.transform = "scaleX(1)";
+        } else {
+          btn.classList.remove("active", "text-brand-charcoal", "font-bold");
+          btn.classList.add("text-brand-gray");
+          if (indicator) indicator.style.transform = "scaleX(0)";
+        }
+      });
+
+      // Show/Hide Content Sections
+      const sections = document.querySelectorAll(".tab-pane");
+      sections.forEach(sec => {
+        if (sec.id === `tabContent-${tabId}`) {
+          sec.classList.remove("hidden");
+        } else {
+          sec.classList.add("hidden");
+        }
+      });
+    }
+
+    // Render Reviews list and summaries inside modal
+    function renderReviewsTab() {
+      if (!currentSelectedTrip) return;
+
+      const trip = currentSelectedTrip;
+
+      // Calculate average rating
+      const reviewCount = trip.reviews.length;
+      let totalRating = 0;
+      trip.reviews.forEach(r => totalRating += r.rating);
+      const avgRating = reviewCount > 0 ? (totalRating / reviewCount).toFixed(1) : "0.0";
+
+      // Update dynamic database rating
+      trip.rating = parseFloat(avgRating);
+      document.getElementById("modalRatingText").innerText = avgRating;
+
+      // Update HTML layouts
+      document.getElementById("reviewsAverageText").innerText = avgRating;
+      document.getElementById("reviewsCountText").innerText = `(${reviewCount} Ulasan)`;
+
+      // Summary stars rendering
+      const starSummaryContainer = document.getElementById("reviewsStarsSummary");
+      starSummaryContainer.innerHTML = "";
+      const roundedAvg = Math.round(parseFloat(avgRating));
+      for (let i = 1; i <= 5; i++) {
+        const starClass = i <= roundedAvg ? "fill-current text-amber-400" : "text-slate-200";
+        starSummaryContainer.innerHTML += `<i data-lucide="star" class="w-5 h-5 ${starClass}"></i>`;
+      }
+
+      // Reviews list container
+      const reviewsContainer = document.getElementById("modalReviewsList");
+      reviewsContainer.innerHTML = "";
+
+      if (trip.reviews.length === 0) {
+        reviewsContainer.innerHTML = `
+          <div class="text-center py-8 text-brand-gray">
+            <p class="text-xs font-semibold">Belum ada ulasan untuk trip ini.</p>
+            <p class="text-[10px]">Jadilah yang pertama menuliskan ulasan perjalanan!</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      trip.reviews.slice().reverse().forEach(rev => {
+        let starsHtml = "";
+        for (let i = 1; i <= 5; i++) {
+          const starFill = i <= rev.rating ? "fill-current text-amber-400" : "text-slate-200";
+          starsHtml += `<i data-lucide="star" class="w-3.5 h-3.5 ${starFill}"></i>`;
+        }
+
+        const initials = rev.name.split(" ").map(n => n[0]).join("").toUpperCase().substring(0, 2);
+
+        reviewsContainer.innerHTML += `
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2 animate-fade-in">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2.5">
+                <div class="w-8 h-8 rounded-full bg-brand-red/10 border border-brand-red/20 text-brand-red flex items-center justify-center font-bold text-xs select-none">
+                  ${initials}
+                </div>
+                <div>
+                  <h5 class="text-xs font-bold text-brand-charcoal">${rev.name}</h5>
+                  <span class="text-[9px] text-brand-gray">${rev.date}</span>
+                </div>
+              </div>
+              <div class="flex text-amber-400">
+                ${starsHtml}
+              </div>
+            </div>
+            <p class="text-xs text-brand-gray leading-relaxed font-medium pl-10">
+              "${rev.comment}"
+            </p>
+          </div>
+        `;
+      });
+
+      // Reset star selector rating
+      setSelectRating(5);
+
+      lucide.createIcons();
+    }
+
+    // Set interactive star selector rating on form
+    function setSelectRating(ratingVal) {
+      activeReviewRating = ratingVal;
+
+      const starSelectBtns = document.querySelectorAll(".star-select");
+      starSelectBtns.forEach(btn => {
+        const val = parseInt(btn.getAttribute("data-val"));
+        if (val <= ratingVal) {
+          btn.classList.add("text-amber-400", "fill-amber-400");
+          btn.classList.remove("text-slate-350");
+        } else {
+          btn.classList.remove("text-amber-400", "fill-amber-400");
+          btn.classList.add("text-slate-350");
+        }
+      });
+    }
+
+    // Handle review submission
+    function handleReviewSubmit(event) {
+      event.preventDefault();
+
+      if (!currentSelectedTrip) return;
+
+      const authorName = document.getElementById("reviewAuthor").value.trim();
+      const commentText = document.getElementById("reviewComment").value.trim();
+
+      const today = new Date();
+      const options = { day: 'numeric', month: 'long', year: 'numeric' };
+      const formattedDate = today.toLocaleDateString('id-ID', options);
+
+      // Push to DB
+      currentSelectedTrip.reviews.push({
+        name: authorName,
+        rating: activeReviewRating,
+        date: formattedDate,
+        comment: commentText
+      });
+
+      // Clear inputs
+      document.getElementById("reviewAuthor").value = "";
+      document.getElementById("reviewComment").value = "";
+
+      // Update UI tabs
+      renderReviewsTab();
+      applyFilters(); // Sync grid cards score
+    }
+
+    // Stepper counter for pax
+    function adjustPax(value) {
+      if (!currentSelectedTrip) return;
+
+      const paxInput = document.getElementById("bookingPax");
+      let count = parseInt(paxInput.value) + value;
+
+      // Limits
+      if (count < 1) count = 1;
+      if (count > currentSelectedTrip.seatsLeft) {
+        count = currentSelectedTrip.seatsLeft;
+        alert(`Maaf, batas maksimum pemesanan untuk trip ini adalah ${currentSelectedTrip.seatsLeft} pax sesuai kapasitas kursi tersisa.`);
+      }
+
+      paxInput.value = count;
+      calculatePricing();
+    }
+
+    // Pricing Live Calculator
+    function calculatePricing() {
+      if (!currentSelectedTrip) return;
+
+      const paxCount = parseInt(document.getElementById("bookingPax").value);
+      const baseCost = currentSelectedTrip.price * paxCount;
+      const taxCost = Math.round(baseCost * 0.05); // 5% Admin Tax
+      const totalCost = baseCost + taxCost;
+
+      // Update elements
+      document.getElementById("calcLabelPax").innerText = `Biaya Dasar (${paxCount} Pax)`;
+      document.getElementById("calcBaseCost").innerText = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(baseCost);
+      document.getElementById("calcTaxCost").innerText = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(taxCost);
+      document.getElementById("calcTotalCost").innerText = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(totalCost);
+    }
+
+    // Booking submission
+    function handleBookingSubmit(event) {
+      event.preventDefault();
+
+      if (!currentSelectedTrip) return;
+
+      const submitBtn = document.getElementById("submitBtn");
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `
+        <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <span>Memproses Pembayaran...</span>
+      `;
+
+      // Simulate verification delay
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `
+          <i data-lucide="credit-card" class="w-4 h-4 text-white"></i>
+          <span>Bayar & Konfirmasi Pemesanan</span>
+        `;
+
+        const name = document.getElementById("bookingName").value;
+        const phone = document.getElementById("bookingPhone").value;
+        const tripDate = document.getElementById("bookingDate").value;
+        const pax = parseInt(document.getElementById("bookingPax").value);
+
+        // Calculate costs
+        const baseCost = currentSelectedTrip.price * pax;
+        const taxCost = Math.round(baseCost * 0.05);
+        const totalCost = baseCost + taxCost;
+
+        // Populate invoice receipt
+        document.getElementById("invoiceId").innerText = `TQ-${Math.floor(100000 + Math.random() * 900000)}`;
+        document.getElementById("invoiceName").innerText = name;
+        document.getElementById("invoicePhone").innerText = phone;
+        document.getElementById("invoiceDest").innerText = currentSelectedTrip.title;
+        document.getElementById("invoiceDate").innerText = tripDate;
+        document.getElementById("invoicePax").innerText = `${pax} Pax`;
+
+        document.getElementById("invoiceBaseCost").innerText = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(baseCost);
+        document.getElementById("invoiceTaxCost").innerText = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(taxCost);
+        document.getElementById("invoiceTotalCost").innerText = new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(totalCost);
+
+        // Deduct seats visually
+        currentSelectedTrip.seatsLeft -= pax;
+
+        // Refresh grids and warning elements
+        applyFilters();
+
+        // Transition to step 3 (Success Invoice Receipt)
+        setModalStep(3);
+
+      }, 1500);
+    }
+
+    function resetBooking() {
+      if (currentSelectedTrip) {
+        openModal(currentSelectedTrip.id);
+      }
+    }
+
+    // Video Player Modal Control
+    function openVideoPlayer(videoUrl) {
+      const modal = document.getElementById("videoModal");
+      const iframe = document.getElementById("videoPlayerFrame");
+
+      iframe.src = videoUrl + "?autoplay=1";
+      modal.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeVideoPlayer() {
+      const modal = document.getElementById("videoModal");
+      const iframe = document.getElementById("videoPlayerFrame");
+
+      iframe.src = "";
+      modal.classList.add("hidden");
+      document.body.style.overflow = "";
+    }
+
+    // Image Zoom Modal Lightbox
+    function openImageZoom(imageUrl) {
+      const modal = document.getElementById("imageZoomModal");
+      const img = document.getElementById("zoomedImage");
+
+      img.src = imageUrl;
+      modal.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeImageZoom() {
+      const modal = document.getElementById("imageZoomModal");
+      modal.classList.add("hidden");
+      document.body.style.overflow = "";
+    }
+
+    // Header Blur on Scroll
+    window.addEventListener("scroll", () => {
+      const header = document.getElementById("mainHeader");
+      if (window.scrollY > 50) {
+        header.classList.add("shadow-md", "bg-white/95");
+        header.classList.remove("bg-white/85");
+      } else {
+        header.classList.add("bg-white/85");
+        header.classList.remove("shadow-md", "bg-white/95");
+      }
+    });
+
+  </script>
+</body>
+
+</html>
